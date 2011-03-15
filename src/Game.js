@@ -86,21 +86,21 @@ Class.create('AOBGame', {
 		Effect.Port.attach(this.buttonsplane);
 		Effect.Port.attach(this.tilesplane);
         this.createMap();
-		this.menub = this.buttonsplane.createSprite('EndTurnButton', {
-			x: WIDTH - 68,
-			y: HEIGHT - 40,
+		this.menub = this.buttonsplane.createSprite('MenuButton', {
+			x: 0,
+			y: HEIGHT - BUTTON_HEIGHT,
 			zIndex: 999});
 		this.endturnb = this.buttonsplane.createSprite('EndTurnButton', {
-			x: WIDTH - 68,
-			y: HEIGHT - 40 - 40,
+			x: WIDTH - 2*BUTTON_WIDTH,
+			y: HEIGHT - BUTTON_HEIGHT,
 			zIndex: 999});
 		this.backb = this.buttonsplane.createSprite('BackButton', {
-			x: WIDTH - 68,
-			y: HEIGHT - 40 - 40 - 40,
+			x: WIDTH - BUTTON_WIDTH,
+			y: HEIGHT - BUTTON_HEIGHT,
 			zIndex: 999});
 		this.okb = this.buttonsplane.createSprite('OkButton', {
-			x: WIDTH - 68,
-			y: HEIGHT - 40 - 40 - 40 - 40,
+			x: WIDTH - BUTTON_WIDTH,
+			y: HEIGHT - 4*BUTTON_HEIGHT,
 			zIndex: 999});
 		Effect.Port.addEventListener('onMouseDown', [this, this.mouseButtonHandler]);
 		Effect.Port.addEventListener('onMouseMove', [this, this.mouseMoveHandler]);
