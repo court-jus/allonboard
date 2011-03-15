@@ -1,0 +1,5 @@
+g = Effect.Port.handlers.mousedown[0][0];
+p = g.players[0];
+p.chooseBestFromWeights({ rewind_distance             : 1, rewind_advanced             : 1, pickup_two                  : 1, pickup_when_low_on_cards    : 1, rewind_early                : 1, forward_distance            : 1, forward_late_peons          : 1, prefer_rewind : 1, });
+
+Effect.Port.handlers.mousedown[0][0].players[0].debugG();

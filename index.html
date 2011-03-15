@@ -1,0 +1,53 @@
+<html lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Allonboard</title>
+        <style>
+        div#effect_container
+            {
+            margin: auto;
+            }
+        div#game
+            {
+            text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="game">
+        <script type="text/javascript" src="http://www.effectgames.com/effect/api/local_dev.js?game=allonboard&engine=1.0b2d&key=efba8f07f1114d0640d8c18b67dcd6e6"></script>
+
+        <!-- My Game Code -->
+        <script type="text/javascript" src="src/constantes.js"></script>
+        <script type="text/javascript" src="src/fonctions.js"></script>
+        <script type="text/javascript" src="src/sprites.js"></script>
+        <script type="text/javascript" src="src/Menu.js"></script>
+        <script type="text/javascript" src="src/Player.js"></script>
+        <script type="text/javascript" src="src/Game.js"></script>
+        <script type="text/javascript" src="src/customrobot.js"></script>
+
+        <script type="text/javascript" src="src/config.js"></script>
+        <script type="text/javascript" src="src/allonboard.js"></script>
+        </div>
+        <div class="help">
+        <h1>Règles</h1>
+        <h2>But</h2>
+        <p>Amener ses 6 pions de l'autre côté du plateau.</p>
+        <h2>Comment avancer ?</h2>
+        <p>Pour avancer, il faut sélectionner un de ses pions puis l'une de ses cartes et valider avec le bouton OK.</p>
+        <p>Le pion va avancer jusqu'à la prochaine case libre de la même couleur que la carte sélectionnée. S'il n'y en a pas, le pion arrive au bout du parcours.</p>
+        <p>Par exemple, si toutes les cases rouges sont occupées et que vous jouez une carte rouge sur un pion qui est encore au départ, il va directement à l'arrivée.</p>
+        <h2>Comment avoir des cartes ?</h2>
+        <p>Pour piocher des cartes, il faut sélectionner l'un de ses pions, passer la souris au dessus du bouton Back puis valider avec le bouton OK.</p>
+        <p>Le pion va reculer jusqu'à la prochaine case comportement déjà 1 ou 2 pions (quel que soit leur propriétaire).</p>
+        <p>Vous allez piocher autant de cartes qu'il y avait de pion sur la case avant l'arrivée de votre pion.</p>
+        <h2>Autre</h2>
+        <p>Le bouton End Turn permet de passer son tour.</p>
+        <h1>Modifier les paramètres</h1>
+        <p>Le seul paramètre modifiable pour l'instant c'est le nombre de joueurs et leur type. Il suffit de modifier le tableau PLAYERS du fichier config.js et de recharger la page.</p>
+        <h1>Créer sa propre IA</h1>
+        <p>Regarder le fichier customrobot.js, il contient un exemple basique et quelques informations/documentations.</p>
+        </div>
+    </body>
+</html>
