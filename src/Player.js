@@ -5,13 +5,13 @@
 Class.create('AOBPlayer', {
     init: function(name, color, id, robotic)
         {
-		this.name = name;
-		this.game = null;
-		this.color = color;
-		this.id = id;
-		this.selected_dot = null;
-		this.selected_card = null;
-		this.dots = [];
+        this.name = name;
+        this.game = null;
+        this.color = color;
+        this.id = id;
+        this.selected_dot = null;
+        this.selected_card = null;
+        this.dots = [];
         this.cards = [];
         this.goingBack = false;
         this.robotic = false;
@@ -31,19 +31,19 @@ Class.create('AOBPlayer', {
     linkToGame: function (game)
         {
         this.game = game;
-		this.cardsplane = new SpritePlane();
-		Effect.Port.attach(this.cardsplane);
-		this.dotsplane = new SpritePlane();
-		Effect.Port.attach(this.dotsplane);
-		this.indicator_dot = this.dotsplane.createSprite('Indicator', {});
-		for (i = 0 ; i < DOTS_PER_PLAYER; i ++)
-			{
+        this.cardsplane = new SpritePlane();
+        Effect.Port.attach(this.cardsplane);
+        this.dotsplane = new SpritePlane();
+        Effect.Port.attach(this.dotsplane);
+        this.indicator_dot = this.dotsplane.createSprite('Indicator', {});
+        for (i = 0 ; i < DOTS_PER_PLAYER; i ++)
+            {
             var newdot = this.dotsplane.createSprite(DOT_CLASSES[this.color], {});
             // newdot.go_to(Math.floor(Math.random() * 36));
             newdot.go_to(0);
-			this.dots.push(newdot);
-			}
-		this.inactivate();
+            this.dots.push(newdot);
+            }
+        this.inactivate();
         this.drawCard(STARTING_CARDS);
         },
     drawCard: function(count)
@@ -83,117 +83,117 @@ Class.create('AOBPlayer', {
             });
         return removed_names;
         },
-	activate: function ()
-		{
-		this.dotsplane.show();
-		this.cardsplane.show();
-		},
-	changeMyDotsZIndex: function(z)
-		{
-		for (var i = 0; i < DOTS_PER_PLAYER; i ++)
-			{
-			this.dots[i].setZIndex(z);
-			}
-		this.indicator_dot.setZIndex(z);
-		},
-	inactivate: function()
-		{
-		this.unselectAll();
-		// this.dotsplane.hide();
-		this.cardsplane.hide();
-		this.indicator_dot.go_toScreenPosition(SLEEPING_INDICATOR_POSITION.x, SLEEPING_INDICATOR_POSITION.y);
-		},
-	isThereAnybodyOutThere: function(position)
-		{
-		for (var i = 0 ; i < DOTS_PER_PLAYER; i ++)
-			{
-			if (this.dots[i].mapindex == position)
-				{
-				return true;
-				}
-			}
-		return false;
-		},
+    activate: function ()
+        {
+        this.dotsplane.show();
+        this.cardsplane.show();
+        },
+    changeMyDotsZIndex: function(z)
+        {
+        for (var i = 0; i < DOTS_PER_PLAYER; i ++)
+            {
+            this.dots[i].setZIndex(z);
+            }
+        this.indicator_dot.setZIndex(z);
+        },
+    inactivate: function()
+        {
+        this.unselectAll();
+        // this.dotsplane.hide();
+        this.cardsplane.hide();
+        this.indicator_dot.go_toScreenPosition(SLEEPING_INDICATOR_POSITION.x, SLEEPING_INDICATOR_POSITION.y);
+        },
+    isThereAnybodyOutThere: function(position)
+        {
+        for (var i = 0 ; i < DOTS_PER_PLAYER; i ++)
+            {
+            if (this.dots[i].mapindex == position)
+                {
+                return true;
+                }
+            }
+        return false;
+        },
     howManyDotsHere: function(position)
         {
         var count = 0;
-		for (var i = 0 ; i < DOTS_PER_PLAYER; i ++)
-			{
-			if (this.dots[i].mapindex == position)
-				{
-				count += 1;
-				}
-			}
-		return count;
+        for (var i = 0 ; i < DOTS_PER_PLAYER; i ++)
+            {
+            if (this.dots[i].mapindex == position)
+                {
+                count += 1;
+                }
+            }
+        return count;
         },
     whoIsHere: function(position)
         {
         var who = [];
-		for (var i = 0 ; i < DOTS_PER_PLAYER; i ++)
-			{
-			if (this.dots[i].mapindex == position)
-				{
-				who.push(this.dots[i]);
-				}
-			}
-		return who;
+        for (var i = 0 ; i < DOTS_PER_PLAYER; i ++)
+            {
+            if (this.dots[i].mapindex == position)
+                {
+                who.push(this.dots[i]);
+                }
+            }
+        return who;
         },
-	unselectAll: function()
-		{
-		if (this.selected_dot)
-			{
-			this.selected_dot.unselectMe();
-			this.selected_dot = null;
-			}
-		if (this.selected_card)
-			{
-			this.selected_card.unselectMe();
-			this.selected_card = null;
-			}
+    unselectAll: function()
+        {
+        if (this.selected_dot)
+            {
+            this.selected_dot.unselectMe();
+            this.selected_dot = null;
+            }
+        if (this.selected_card)
+            {
+            this.selected_card.unselectMe();
+            this.selected_card = null;
+            }
         this.goingBack = false;
-		this.indicator_dot.go_toScreenPosition(SLEEPING_INDICATOR_POSITION.x, SLEEPING_INDICATOR_POSITION.y);
-		},
-	mouseButtonHandler: function(pt, buttonIdx)
-		{
-		if (buttonIdx == Effect.RIGHT_BUTTON)
-			{
-			this.unselectAll();
-			return;
-			}
-		if (buttonIdx != Effect.LEFT_BUTTON)
-			{
-			return;
-			}
-		var dotclicked = this.dotsplane.lookupSpriteFromGlobal( pt );
-		var cardclicked = this.cardsplane.lookupSpriteFromGlobal( pt );
-		if (dotclicked)
-			{
-			if (dotclicked == this.indicator_dot)
-				{
-				this.unselectAll();
-				}
-			else if (dotclicked.mapindex == LANDHERE)
-				{
-				this.unselectAll();
-				}
-			else
-				{
-				if (this.selected_dot) { this.selected_dot.unselectMe(); }
-				this.selected_dot = dotclicked;
-				this.selected_dot.selectMe();
-				}
-			}
-		if (cardclicked)
-			{
-			if (this.selected_card) { this.selected_card.unselectMe(); }
-			this.selected_card = cardclicked;
-			this.selected_card.selectMe();
-			}
-		if (this.selected_card && this.selected_dot)
-			{
+        this.indicator_dot.go_toScreenPosition(SLEEPING_INDICATOR_POSITION.x, SLEEPING_INDICATOR_POSITION.y);
+        },
+    mouseButtonHandler: function(pt, buttonIdx)
+        {
+        if (buttonIdx == Effect.RIGHT_BUTTON)
+            {
+            this.unselectAll();
+            return;
+            }
+        if (buttonIdx != Effect.LEFT_BUTTON)
+            {
+            return;
+            }
+        var dotclicked = this.dotsplane.lookupSpriteFromGlobal( pt );
+        var cardclicked = this.cardsplane.lookupSpriteFromGlobal( pt );
+        if (dotclicked)
+            {
+            if (dotclicked == this.indicator_dot)
+                {
+                this.unselectAll();
+                }
+            else if (dotclicked.mapindex == LANDHERE)
+                {
+                this.unselectAll();
+                }
+            else
+                {
+                if (this.selected_dot) { this.selected_dot.unselectMe(); }
+                this.selected_dot = dotclicked;
+                this.selected_dot.selectMe();
+                }
+            }
+        if (cardclicked)
+            {
+            if (this.selected_card) { this.selected_card.unselectMe(); }
+            this.selected_card = cardclicked;
+            this.selected_card.selectMe();
+            }
+        if (this.selected_card && this.selected_dot)
+            {
             this.game.pressOkButton();
-			}
-		},
+            }
+        },
     mouseMoveHandler: function(pt, mouseEvent)
         {
         if (this.selected_dot)
@@ -213,16 +213,16 @@ Class.create('AOBPlayer', {
                 }
             }
         },
-	checkWinConditions: function()
-		{
-		for (var i = 0 ; i < this.dots.length; i ++)
-			{
-			if (this.dots[i].mapindex != LANDHERE) return false;
-			}
-		return true;
-		},
-	startTurn: function()
-		{
+    checkWinConditions: function()
+        {
+        for (var i = 0 ; i < this.dots.length; i ++)
+            {
+            if (this.dots[i].mapindex != LANDHERE) return false;
+            }
+        return true;
+        },
+    startTurn: function()
+        {
         this.goingBack = false;
         for(var i = 0 ; i < this.cards.length; i ++)
             {
@@ -234,7 +234,7 @@ Class.create('AOBPlayer', {
             {
             this.robotStartTurn();
             }
-		},
+        },
     robotStartTurn: function()
         {
         var nextmove = this.chooseNextMove();
@@ -272,11 +272,11 @@ Class.create('AOBPlayer', {
                 }
             }
         },
-	endTurn: function()
-		{
-		this.inactivate();
-		this.changeMyDotsZIndex(100);
-		},
+    endTurn: function()
+        {
+        this.inactivate();
+        this.changeMyDotsZIndex(100);
+        },
     whatAreMyOptions: function(dots, cards)
         {
         var options = [];
@@ -329,16 +329,16 @@ Class.create('AOBPlayer', {
             // Plus le recul est court mieux c'est
             score += weights.rewind_distance * (after.dot.mapindex - after.newpos) / 37.0;
             // console.debug("rewind_distance",weights.rewind_distance, (after.newpos - after.dot.mapindex));
-			// On prefere reculer les pions qui ont deja bien avance
+            // On prefere reculer les pions qui ont deja bien avance
             score += weights.rewind_advanced * (after.dot.mapindex) / 37.0;
             // console.debug("rewind_advanced", weights.rewind_advanced, (after.dot.mapindex));
-			// Si le recul permet de piocher 2 cartes, c'est genial
+            // Si le recul permet de piocher 2 cartes, c'est genial
             score += weights.pickup_two * (after.newcards) / 2.0;
             // console.debug("pickup_two", weights.pickup_two , (after.newcards));
-			// Si on a 3 cartes ou moins, on va preferer piocher, sinon non
+            // Si on a 3 cartes ou moins, on va preferer piocher, sinon non
             score += weights.pickup_when_low_on_cards * (this.cards.length <= 3);
             // console.debug("pickup_when_low_on_cards", weights.pickup_when_low_on_cards, (this.cards.length <= 3));
-			// On va piocher plus au debut de la partie
+            // On va piocher plus au debut de la partie
             score += weights.rewind_early * (sb.distance) / 216.0;
             // console.debug('rewind_early', weights.rewind_early, (sb.distance));
 
@@ -346,10 +346,10 @@ Class.create('AOBPlayer', {
             }
         else
             {
-			// Plus l'avancee est longue, mieux c'est
+            // Plus l'avancee est longue, mieux c'est
             score += weights.forward_distance * (after.newpos - after.dot.mapindex) / 37.0;
             // console.debug("forward_distance",weights.forward_distance, (after.newpos - after.dot.mapindex));
-			// On va preferer avancer d'abbord les nains qui ont le moins avance
+            // On va preferer avancer d'abbord les nains qui ont le moins avance
             score += weights.forward_late_peons * (MAXMAPINDEX - after.dot.mapindex) / 37.0;
             // console.debug("forward_late_peons", weights.forward_late_peons , (MAXMAPINDEX - after.dot.mapindex));
             }
@@ -380,7 +380,7 @@ Class.create('AOBPlayer', {
         var choosen = this.chooseBestFromWeights(WEIGHTS_1);
         // console.debug("Choosen",choosen.dot.mapindex, (choosen.goingBack ? "back" : choosen.card.type));
         },
-	});
+    });
 
 AOBPlayer.subclass('Human', {});
 AOBPlayer.subclass('Robot', {

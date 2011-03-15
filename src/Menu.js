@@ -32,15 +32,15 @@ Class.create('AOBMenu', {
     mouseButtonHandler: function(pt, buttonIdx)
         {
         if (!this.active) return;
-		if (buttonIdx == Effect.LEFT_BUTTON)
-			{
+        if (buttonIdx == Effect.LEFT_BUTTON)
+            {
             this.items.forEach(function (item, idx, items)
                 {
                 var buttonsplane = item[0];
                 var sprite = buttonsplane.lookupSpriteFromGlobal(pt);
                 if ((sprite) && (sprite == item[1])) item[2].call(this);
                 }, this);
-			}
+            }
         else if (buttonIdx == Effect.RIGHT_BUTTON)
             {
             this.quit();
@@ -117,7 +117,7 @@ AOBMenu.subclass('NewPlayerMenu', {
         var i = this.game.players.length;
         var p = new Human();
         p.init('Human' + i, i, i, false);
-		p.linkToGame(this.game);
+        p.linkToGame(this.game);
         this.game.scores[p.name] = 0;
         this.game.players.push(p);
         },
@@ -127,7 +127,7 @@ AOBMenu.subclass('NewPlayerMenu', {
         var i = this.game.players.length;
         var p = new cls();
         p.init('Robot' + i, i, i, true);
-		p.linkToGame(this.game);
+        p.linkToGame(this.game);
         this.game.scores[p.name] = 0;
         this.game.players.push(p);
         }

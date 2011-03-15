@@ -4,62 +4,62 @@
 // Copyright (c) 2011 Ghislain Leveque
 
 Sprite.extend('EndTurnButton', {
-	width: 100,
-	height: 44,
-	url: '/images/buttons/end.png'
-	});
+    width: 100,
+    height: 44,
+    url: '/images/buttons/end.png'
+    });
 Sprite.extend('OkButton', {
-	width: 100,
-	height: 44,
-	url: '/images/buttons/OK.png'
-	});
+    width: 100,
+    height: 44,
+    url: '/images/buttons/OK.png'
+    });
 Sprite.extend('BackButton', {
-	width: 100,
-	height: 44,
-	url: '/images/buttons/back.png'
-	});
+    width: 100,
+    height: 44,
+    url: '/images/buttons/back.png'
+    });
 Sprite.extend('MenuButton', {
-	width: 100,
-	height: 44,
-	url: '/images/buttons/menu.png'
-	});
+    width: 100,
+    height: 44,
+    url: '/images/buttons/menu.png'
+    });
 Sprite.extend('Dot', {
-	mapindex: 0,
-	width: 64,
-	height: 64,
-	color: null,
+    mapindex: 0,
+    width: 64,
+    height: 64,
+    color: null,
     is_peon: true,
-	base_url: '/images/sprites/reddot.png',
-	sel_url: '/images/sprites/selreddot.png',
-	__construct: function()
-		{
-		this.go_to(this.mapindex);
-		},
-	selectMe: function()
-		{
+    base_url: '/images/sprites/reddot.png',
+    sel_url: '/images/sprites/selreddot.png',
+    __construct: function()
+        {
+        this.go_to(this.mapindex);
+        },
+    selectMe: function()
+        {
         this.setZIndex(999);
-		this.setImage(this.sel_url);
-		},
-	unselectMe: function()
-		{
+        this.setImage(this.sel_url);
+        },
+    unselectMe: function()
+        {
         this.setZIndex(900);
-		this.setImage(this.base_url);
-		},
-	go_toScreenPosition: function(mx, my)
-		{
-		this.x = mx;
-		this.y = my;
-		},
-	go_to: function (mi, whos)
-		{
+        this.setImage(this.base_url);
+        },
+    go_toScreenPosition: function(mx, my)
+        {
+        this.x = mx;
+        this.y = my;
+        },
+    go_to: function (mi, whos)
+        {
         if (whos && whos.length == 2)
             {
             whos.forEach(function (s,i,a) { s.setScale(1.0); s.go_to(s.mapindex); });
             this.setScale(1.0);
             }
-		this.mapindex = mi;
-		this.x = mapIndexToScreenX(mi, this);
-		this.y = mapIndexToScreenY(mi, this);
+        this.mapindex = mi;
+        this.x = mapIndexToScreenX(mi, this);
+        this.y = mapIndexToScreenY(mi, this);
         if (this.is_peon)
             {
             this.y -= 20;
@@ -69,7 +69,7 @@ Sprite.extend('Dot', {
             this.x += (64-40)/2;
             this.y += (52-40)/2;
             }
-		},
+        },
     calculateAndApplyScale: function (index)
         {
         this.setScale(0.66);
@@ -80,118 +80,118 @@ Sprite.extend('Dot', {
             this.go_toScreenPosition(this.x + moveby, this.y + moveby);
             }
         }
-	});
+    });
 Sprite.extend('Card', {
-	width: 68,
-	height: 120,
+    width: 68,
+    height: 120,
     cardindex: 0,
-	color: null,
-	base_url: '/images/cards/cwhite.png',
-	sel_url: '/images/cards/selwhite.png',
-	selectMe: function()
-		{
-		this.setZIndex(999);
-		this.setImage(this.sel_url);
-		},
-	unselectMe: function()
-		{
-		this.setZIndex(950 + this.cardindex);
-		this.setImage(this.base_url);
-		},
+    color: null,
+    base_url: '/images/cards/cwhite.png',
+    sel_url: '/images/cards/selwhite.png',
+    selectMe: function()
+        {
+        this.setZIndex(999);
+        this.setImage(this.sel_url);
+        },
+    unselectMe: function()
+        {
+        this.setZIndex(950 + this.cardindex);
+        this.setImage(this.base_url);
+        },
     setIndex: function(i)
         {
         this.cardindex = i;
         this.y = VERTICAL_CARD_OFFSET * i;
         this.setZIndex(950 + i);
         }
-	});
+    });
 Sprite.extend('Tile', {
-	width: 64,
-	height: 108,
+    width: 64,
+    height: 108,
     color: null,
     url: '/images/tiles/white.png',
     });
 Dot.subclass('Indicator', {
     width: 40,
     height: 40,
-	color: null,
+    color: null,
     is_peon: false,
-	base_url: '/images/sprites/indicator.png',
-	url: '/images/sprites/indicator.png',
-	sel_url: '/images/sprites/indicator.png',
+    base_url: '/images/sprites/indicator.png',
+    url: '/images/sprites/indicator.png',
+    sel_url: '/images/sprites/indicator.png',
     });
 Dot.subclass('RedDot', {
-	color: RED,
-	base_url: '/images/sprites/reddot.png',
-	url: '/images/sprites/reddot.png',
-	sel_url: '/images/sprites/selreddot.png',
-	});
+    color: RED,
+    base_url: '/images/sprites/reddot.png',
+    url: '/images/sprites/reddot.png',
+    sel_url: '/images/sprites/selreddot.png',
+    });
 Dot.subclass('GreenDot', {
-	color: GREEN,
-	base_url: '/images/sprites/greendot.png',
-	url: '/images/sprites/greendot.png',
-	sel_url: '/images/sprites/selgreendot.png',
-	});
+    color: GREEN,
+    base_url: '/images/sprites/greendot.png',
+    url: '/images/sprites/greendot.png',
+    sel_url: '/images/sprites/selgreendot.png',
+    });
 Dot.subclass('BlueDot', {
-	color: BLUE,
-	base_url: '/images/sprites/bluedot.png',
-	url: '/images/sprites/bluedot.png',
-	sel_url: '/images/sprites/selbluedot.png',
-	});
+    color: BLUE,
+    base_url: '/images/sprites/bluedot.png',
+    url: '/images/sprites/bluedot.png',
+    sel_url: '/images/sprites/selbluedot.png',
+    });
 Dot.subclass('WhiteDot', {
-	color: WHITE,
-	base_url: '/images/sprites/whitedot.png',
-	url: '/images/sprites/whitedot.png',
-	sel_url: '/images/sprites/selwhitedot.png',
-	});
+    color: WHITE,
+    base_url: '/images/sprites/whitedot.png',
+    url: '/images/sprites/whitedot.png',
+    sel_url: '/images/sprites/selwhitedot.png',
+    });
 Dot.subclass('BlackDot', {
-	color: BLACK,
-	base_url: '/images/sprites/blackdot.png',
-	url: '/images/sprites/blackdot.png',
-	sel_url: '/images/sprites/selblackdot.png',
-	});
+    color: BLACK,
+    base_url: '/images/sprites/blackdot.png',
+    url: '/images/sprites/blackdot.png',
+    sel_url: '/images/sprites/selblackdot.png',
+    });
 Dot.subclass('BrownDot', {
-	color: BROWN,
-	base_url: '/images/sprites/browndot.png',
-	url: '/images/sprites/browndot.png',
-	sel_url: '/images/sprites/selbrowndot.png',
-	});
+    color: BROWN,
+    base_url: '/images/sprites/browndot.png',
+    url: '/images/sprites/browndot.png',
+    sel_url: '/images/sprites/selbrowndot.png',
+    });
 Card.subclass('RedCard', {
-	color: RED,
-	base_url: 'images/cards/cred.png',
-	url: 'images/cards/cred.png',
-	sel_url: 'images/cards/selred.png'
-	});
+    color: RED,
+    base_url: 'images/cards/cred.png',
+    url: 'images/cards/cred.png',
+    sel_url: 'images/cards/selred.png'
+    });
 Card.subclass('BlueCard', {
-	color: BLUE,
-	base_url: 'images/cards/cblue.png',
-	url: 'images/cards/cblue.png',
-	sel_url: 'images/cards/selblue.png'
-	});
+    color: BLUE,
+    base_url: 'images/cards/cblue.png',
+    url: 'images/cards/cblue.png',
+    sel_url: 'images/cards/selblue.png'
+    });
 Card.subclass('GreenCard', {
-	color: GREEN,
-	base_url: 'images/cards/cgreen.png',
-	url: 'images/cards/cgreen.png',
-	sel_url: 'images/cards/selgreen.png'
-	});
+    color: GREEN,
+    base_url: 'images/cards/cgreen.png',
+    url: 'images/cards/cgreen.png',
+    sel_url: 'images/cards/selgreen.png'
+    });
 Card.subclass('BlackCard', {
-	color: BLACK,
-	base_url: 'images/cards/cblack.png',
-	url: 'images/cards/cblack.png',
-	sel_url: 'images/cards/selblack.png'
-	});
+    color: BLACK,
+    base_url: 'images/cards/cblack.png',
+    url: 'images/cards/cblack.png',
+    sel_url: 'images/cards/selblack.png'
+    });
 Card.subclass('BrownCard', {
-	color: BROWN,
-	base_url: 'images/cards/cbrown.png',
-	url: 'images/cards/cbrown.png',
-	sel_url: 'images/cards/selbrown.png'
-	});
+    color: BROWN,
+    base_url: 'images/cards/cbrown.png',
+    url: 'images/cards/cbrown.png',
+    sel_url: 'images/cards/selbrown.png'
+    });
 Card.subclass('WhiteCard', {
-	color: WHITE,
-	base_url: 'images/cards/cwhite.png',
-	url: 'images/cards/cwhite.png',
-	sel_url: 'images/cards/selwhite.png'
-	});
+    color: WHITE,
+    base_url: 'images/cards/cwhite.png',
+    url: 'images/cards/cwhite.png',
+    sel_url: 'images/cards/selwhite.png'
+    });
 Tile.subclass('BlackTile', {
     color: BLACK,
     url: '/images/newtiles/black.png',
