@@ -10,7 +10,8 @@ Class.create('AOBGame', {
 		this.hud = hud;
 		this.level = 'CuteLevel';
 		this.players = players;
-        this.menus = [];
+        this.menus = {}
+        this.active_menu = null;
         this.scores = {};
         this.current_error_message = "";
         this.drawgame = 0;
@@ -103,8 +104,16 @@ Class.create('AOBGame', {
 			zIndex: 999});
 		Effect.Port.addEventListener('onMouseDown', [this, this.mouseButtonHandler]);
 		Effect.Port.addEventListener('onMouseMove', [this, this.mouseMoveHandler]);
-        this.menus.push(new AOBMenu());
-        this.menus.forEach(function(m) { m.linkToGame(this); }, this);
+        this.menus['main'] = new MainMenu();
+        this.menus['newplayer'] = new NewPlayerMenu();
+        this.menus['newplayer'].parentMenu = this.menus['main'];
+        this.menus['delplayer'] = new DelPlayerMenu();
+        this.menus['delplayer'].parentMenu = this.menus['main'];
+        for(menuid in this.menus)
+            {
+            this.menus[menuid].linkToGame(this);
+            }
+        this.active_menu = this.menus['main'];
 		this.game_running = true;
 		this.startTurn();
 		},
@@ -124,7 +133,7 @@ Class.create('AOBGame', {
         },
 	startTurn: function()
 		{
-		if (!this.game_running) return;
+		if (!this.isGameActive()) return;
         this.clearHud();
 		this.current_player = this.players[this.current_player_index];
 		this.hud.setString(0, 0, "It's " + this.current_player.name + " turn.");
@@ -141,17 +150,25 @@ Class.create('AOBGame', {
 	endTurn: function()
 		{
 		this.current_player.endTurn();
-		this.current_player_index += 1;
-		if (this.current_player_index >= this.players.length)
-			this.current_player_index = 0;
+        this.nextPlayer();
 		this.checkWinConditions();
 		this.startTurn();
 		},
+    nextPlayer: function()
+        {
+		this.current_player_index += 1;
+		if (this.current_player_index >= this.players.length)
+			this.current_player_index = 0;
+        },
 	endGame: function(restart)
 		{
 		this.game_running = false;
         if (restart) this.restartGame();
 		},
+    isGameActive: function()
+        {
+        return ((this.game_running) && (this.players.length > 0));
+        },
     restartGame: function()
         {
         this.showScores();
@@ -194,19 +211,19 @@ Class.create('AOBGame', {
 				{
 				if (sprite == this.endturnb)
 					{
-                    if (this.game_running) this.pressEndTurnButton();
+                    if (this.isGameActive()) this.pressEndTurnButton();
 					return;
 					}
 				if (sprite == this.okb)
 					{
-                    if (this.game_running) this.pressOkButton();
+                    if (this.isGameActive()) this.pressOkButton();
 					return;
 					}
                 if (sprite == this.menub)
                     {
                     this.game_running = false;
                     this.hideAllGame();
-                    this.menus[0].start();
+                    this.active_menu.start();
                     return;
                     }
 				}
@@ -215,8 +232,8 @@ Class.create('AOBGame', {
             {
             this.setError();
             }
-		if (this.game_running) this.current_player.mouseButtonHandler(pt, buttonIdx);
-        this.menus.forEach(function(m) {m.mouseButtonHandler(pt, buttonIdx); }, this);
+		if (this.isGameActive()) this.current_player.mouseButtonHandler(pt, buttonIdx);
+        this.active_menu.mouseButtonHandler(pt, buttonIdx);
 		},
     pressOkButton: function()
         {
@@ -254,7 +271,7 @@ Class.create('AOBGame', {
         },
     mouseMoveHandler: function(pt, mouseEvent)
         {
-		if (!this.game_running) return;
+		if (!this.isGameActive()) return;
         var sprite = this.buttonsplane.lookupSpriteFromGlobal(pt);
         if (sprite)
             {

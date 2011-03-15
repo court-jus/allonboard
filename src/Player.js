@@ -24,6 +24,7 @@ Class.create('AOBPlayer', {
             d.go_to(0);
             });
         this.cards = [];
+        this.cardsplane.deleteAll();
         this.inactivate();
         this.drawCard(STARTING_CARDS);
         },
