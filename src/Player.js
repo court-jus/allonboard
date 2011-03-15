@@ -191,7 +191,7 @@ Class.create('AOBPlayer', {
             }
         if (this.selected_card && this.selected_dot)
             {
-            this.game.pressOkButton();
+            this.game.validateMove();
             }
         },
     mouseMoveHandler: function(pt, mouseEvent)
@@ -253,11 +253,11 @@ Class.create('AOBPlayer', {
                 }
             if (ROBOT_SLEEP > 0)
                 {
-                window.setTimeout(function (o) {o.pressOkButton();}, ROBOT_SLEEP, this.game);
+                window.setTimeout(function (o) {o.validateMove();}, ROBOT_SLEEP, this.game);
                 }
             else
                 {
-                this.game.pressOkButton();
+                this.game.validateMove();
                 }
             }
         else

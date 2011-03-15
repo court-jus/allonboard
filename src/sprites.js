@@ -8,11 +8,6 @@ Sprite.extend('EndTurnButton', {
     height: 44,
     url: '/images/buttons/end.png'
     });
-Sprite.extend('OkButton', {
-    width: 100,
-    height: 44,
-    url: '/images/buttons/OK.png'
-    });
 Sprite.extend('BackButton', {
     width: 100,
     height: 44,

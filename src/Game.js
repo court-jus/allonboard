@@ -98,10 +98,6 @@ Class.create('AOBGame', {
             x: WIDTH - BUTTON_WIDTH,
             y: HEIGHT - BUTTON_HEIGHT,
             zIndex: 999});
-        this.okb = this.buttonsplane.createSprite('OkButton', {
-            x: WIDTH - BUTTON_WIDTH,
-            y: HEIGHT - 4*BUTTON_HEIGHT,
-            zIndex: 999});
         Effect.Port.addEventListener('onMouseDown', [this, this.mouseButtonHandler]);
         Effect.Port.addEventListener('onMouseMove', [this, this.mouseMoveHandler]);
         this.menus['main'] = new MainMenu();
@@ -214,9 +210,9 @@ Class.create('AOBGame', {
                     if (this.isGameActive()) this.pressEndTurnButton();
                     return;
                     }
-                if (sprite == this.okb)
+                if ((sprite == this.backb) && (this.current_player.selected_dot) && (this.current_player.goingBack))
                     {
-                    if (this.isGameActive()) this.pressOkButton();
+                    if (this.isGameActive()) this.validateMove();
                     return;
                     }
                 if (sprite == this.menub)
@@ -235,7 +231,7 @@ Class.create('AOBGame', {
         if (this.isGameActive()) this.current_player.mouseButtonHandler(pt, buttonIdx);
         this.active_menu.mouseButtonHandler(pt, buttonIdx);
         },
-    pressOkButton: function()
+    validateMove: function()
         {
         this.drawgame = 0;
         if (this.current_player.selected_dot && this.current_player.selected_card)
