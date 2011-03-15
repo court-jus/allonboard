@@ -4,19 +4,24 @@
 // Copyright (c) 2011 Ghislain Leveque
 
 Sprite.extend('EndTurnButton', {
-	width: 68,
-	height: 34,
-	url: '/images/buttons/endturn.png'
+	width: 100,
+	height: 44,
+	url: '/images/buttons/end.png'
 	});
 Sprite.extend('OkButton', {
-	width: 68,
-	height: 34,
-	url: '/images/buttons/ok.png'
+	width: 100,
+	height: 44,
+	url: '/images/buttons/OK.png'
 	});
 Sprite.extend('BackButton', {
-	width: 68,
-	height: 34,
+	width: 100,
+	height: 44,
 	url: '/images/buttons/back.png'
+	});
+Sprite.extend('MenuButton', {
+	width: 100,
+	height: 44,
+	url: '/images/buttons/menu.png'
 	});
 Sprite.extend('Dot', {
 	mapindex: 0,
