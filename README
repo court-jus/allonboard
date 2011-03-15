@@ -13,7 +13,7 @@ Amener ses 6 pions de l'autre côté du plateau.
 Comment avancer ?
 =================
 
-Pour avancer, il faut sélectionner un de ses pions puis l'une de ses cartes et valider avec le bouton OK.
+Pour avancer, il faut sélectionner un de ses pions puis l'une de ses cartes.
 
 Le pion va avancer jusqu'à la prochaine case libre de la même couleur que la carte sélectionnée. S'il n'y en a pas, le pion arrive au bout du parcours.
 
@@ -22,7 +22,7 @@ Par exemple, si toutes les cases rouges sont occupées et que vous jouez une car
 Comment avoir des cartes ?
 ==========================
 
-Pour piocher des cartes, il faut sélectionner l'un de ses pions, passer la souris au dessus du bouton Back puis valider avec le bouton OK.
+Pour piocher des cartes, il faut sélectionner l'un de ses pions, puis cliquer sur le  bouton Back.
 
 Le pion va reculer jusqu'à la prochaine case comportement déjà 1 ou 2 pions (quel que soit leur propriétaire).
 
