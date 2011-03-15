@@ -191,11 +191,27 @@ Class.create('AOBPlayer', {
 			}
 		if (this.selected_card && this.selected_dot)
 			{
-			this.indicator_dot.go_to(this.game.findNextPosition(this.selected_dot.mapindex, this.selected_card.color));
+            this.game.pressOkButton();
 			}
 		},
     mouseMoveHandler: function(pt, mouseEvent)
         {
+        if (this.selected_dot)
+            {
+            var hovercard = this.cardsplane.lookupSpriteFromGlobal(pt);
+            if (hovercard)
+                {
+                this.indicator_dot.go_to(this.game.findNextPosition(this.selected_dot.mapindex, hovercard.color));
+                }
+            }
+        if (this.selected_card)
+            {
+            var hoverdot = this.dotsplane.lookupSpriteFromGlobal(pt);
+            if (hoverdot)
+                {
+                this.indicator_dot.go_to(this.game.findNextPosition(hoverdot.mapindex, this.selected_card.color));
+                }
+            }
         },
 	checkWinConditions: function()
 		{
