@@ -159,6 +159,8 @@ Class.create('AOBGame', {
     endGame: function(restart)
         {
         this.game_running = false;
+        this.current_player.endGame(true);
+        this.players.forEach(function (p) { if (p != this.current_player) p.endGame(false); }, this);
         if (restart) this.restartGame();
         },
     isGameActive: function()

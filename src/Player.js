@@ -16,6 +16,7 @@ Class.create('AOBPlayer', {
         this.goingBack = false;
         this.robotic = false;
         if (robotic !== undefined) this.robotic = robotic;
+        if (this.custominit) this.custominit.call(this);
         },
     restartGame: function() 
         {
@@ -276,6 +277,9 @@ Class.create('AOBPlayer', {
         {
         this.inactivate();
         this.changeMyDotsZIndex(100);
+        },
+    endGame: function(winner)
+        {
         },
     whatAreMyOptions: function(dots, cards)
         {
