@@ -81,6 +81,7 @@ Sprite.extend('Card', {
     height: 120,
     cardindex: 0,
     color: null,
+    special: false,
     base_url: '/images/cards/cwhite.png',
     sel_url: '/images/cards/selwhite.png',
     selectMe: function()
@@ -186,6 +187,13 @@ Card.subclass('WhiteCard', {
     base_url: 'images/cards/cwhite.png',
     url: 'images/cards/cwhite.png',
     sel_url: 'images/cards/selwhite.png'
+    });
+Card.subclass('SpecialCard', {
+    color: null,
+    special: true,
+    base_url: 'images/cards/cspec.png',
+    url: 'images/cards/cspec.png',
+    sel_url: 'images/cards/selspec.png'
     });
 Tile.subclass('BlackTile', {
     color: BLACK,
