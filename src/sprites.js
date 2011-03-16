@@ -191,6 +191,11 @@ Card.subclass('WhiteCard', {
 Card.subclass('SpecialCard', {
     color: null,
     special: true,
+    doc: "Move directly to the end",
+    doSpecialThing: function(game)
+        {
+        console.debug("I",this,"will act on",game);
+        },
     base_url: 'images/cards/cspec.png',
     url: 'images/cards/cspec.png',
     sel_url: 'images/cards/selspec.png'

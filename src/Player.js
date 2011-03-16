@@ -186,7 +186,21 @@ Class.create('AOBPlayer', {
             }
         if (cardclicked)
             {
-            if (this.selected_card) { this.selected_card.unselectMe(); }
+            if (this.selected_card)
+                {
+                if (this.selected_card == cardclicked)
+                    {
+                    // He re-clicked the same card. If it's a special one, that mean he validates the card
+                    if (this.selected_card.special)
+                        {
+                        if (this.selected_card.doSpecialThing)
+                            {
+                            this.selected_card.doSpecialThing(this.game);
+                            }
+                        }
+                    }
+                this.selected_card.unselectMe();
+                }
             this.selected_card = cardclicked;
             this.selected_card.selectMe();
             }
