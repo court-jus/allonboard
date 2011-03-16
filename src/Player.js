@@ -530,3 +530,46 @@ AOBPlayer.subclass('Weighter6', {
         return this.chooseBestFromWeights(makeWeightFromArray(WEIGHTS[5]));
         },
     });
+AOBPlayer.subclass('Adaptative', {
+    custominit: function()
+        {
+        //this.choices = [0.1,0.2,0.4,0.5,0.8,1,2,3,4,5,6,7,8,9,10,12,15,18,20,25,30,40,50];
+        this.choices = [0.1,1,10,50];
+        this.choice_index = 0;
+        this.decale = 0;
+        this.initial_weights = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1];
+        this.stats = [{},{},{},{},{},{},{},{}];
+        this.showW();
+        },
+    chooseNextMove: function()
+        {
+        return this.chooseBestFromWeights(makeWeightFromArray(this.initial_weights));
+        },
+    showW: function()
+        {
+        console.debug(this.initial_weights);
+        },
+    endGame: function(winner)
+        {
+        var new_w = [];
+        this.choice_index += 1;
+        if (this.choice_index % this.choices.length == 0)
+            {
+            this.decale += 1;
+            }
+        this.initial_weights.forEach(function (w, i, ws)
+            {
+            if (this.stats[i][w] === undefined)
+                {
+                this.stats[i][w] = winner * 1;
+                }
+            else
+                {
+                this.stats[i][w] += winner * 1;
+                }
+            new_w.push(this.choices[(this.choice_index + i * this.decale) % this.choices.length]);
+            }, this);
+        this.initial_weights = new_w;
+        this.showW();
+        },
+    });
