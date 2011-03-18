@@ -35,7 +35,6 @@ var LAUNCH = -1,
                            GREEN, RED, BLUE, BLACK, BROWN, WHITE,
                            GREEN, BROWN, RED, WHITE, BLUE, BLACK,
                            BLUE, GREEN, RED, WHITE, BROWN, BLACK, LANDHERE),
-    CARDNAMES    = ['RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard'],
     DEFAULT_DECK = ['RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
                     'RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
                     'RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
@@ -121,7 +120,6 @@ var LAUNCH = -1,
         ]
     ;
     /*
-    CARDNAMES = ['RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard'],
     DEFAULT_DECK = ['RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
                     'RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
                     'RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
