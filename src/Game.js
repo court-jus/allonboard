@@ -32,7 +32,8 @@ Class.create('AOBGame', {
         },
     hideAllGame: function()
         {
-        this.tilesplane.hide();
+        this.tilesplane.setOpacity(0.1);
+        this.buttonsplane.hide();
         this.players.forEach(function (p)
             {
             p.cardsplane.hide();
@@ -42,6 +43,8 @@ Class.create('AOBGame', {
     showGame: function()
         {
         this.tilesplane.show();
+        this.tilesplane.setOpacity(1);
+        this.buttonsplane.show();
         this.players.forEach(function (p)
             {
             p.dotsplane.show();
