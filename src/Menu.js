@@ -5,6 +5,7 @@ Class.create('AOBMenu', {
         this.parentMenu = null;
         this.active = false;
         this.items = [];
+        this.game_was_running = false;
         },
     makeItems: function()
         {
@@ -46,9 +47,10 @@ Class.create('AOBMenu', {
             this.quit();
             }
         },
-    start: function()
+    start: function(game_was_running)
         {
         this.show();
+        this.game_was_running = game_was_running;
         this.active = true;
         this.game.active_menu = this;
         },
@@ -77,7 +79,7 @@ Class.create('AOBMenu', {
         else
             {
             this.game.showGame();
-            this.game.game_running = true;
+            this.game.game_running = this.game_was_running;
             }
         },
     branchToMenu: function(menuid)

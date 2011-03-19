@@ -210,11 +210,13 @@ Class.create('AOBGame', {
         },
     openMenu: function(menu_name)
         {
+        var game_was_running = this.game_running;
+        this.clearHud();
         this.game_running = false;
         this.hideAllGame();
         if (menu_name)
             {
-            this.menus[menu_name].start()
+            this.menus[menu_name].start(game_was_running);
             }
         else
             {
