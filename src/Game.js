@@ -186,6 +186,7 @@ Class.create('AOBGame', {
             p.restartGame();
             });
         this.current_player_index = Math.floor(Math.random() * this.players.length);
+        this.current_player = this.players[this.current_player_index];
         this.game_running = true;
         this.startTurn();
         },
