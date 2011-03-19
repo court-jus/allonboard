@@ -46,7 +46,7 @@ Class.create('AOBGame', {
             {
             p.dotsplane.show();
             }, this);
-        this.current_player.activate();
+        if (this.current_player) this.current_player.activate();
         },
     setError: function(text)
         {
