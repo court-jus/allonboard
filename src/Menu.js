@@ -6,9 +6,46 @@ Class.create('AOBMenu', {
         this.active = false;
         this.items = [];
         this.game_was_running = false;
+        this.title = null;
         },
     makeItems: function()
         {
+        },
+    setTitle: function(text)
+        {
+        if (this.title)
+            {
+            this.title.x = WIDTH / 2 - text.length * 16;
+            this.title.setString(0,0,text);
+            }
+        else
+            {
+            var plane = new SpritePlane();
+            Effect.Port.attach(plane);
+            var tsprite = new TextSprite();
+            tsprite.setFont('Optimer');
+            tsprite.setTracking(1.0,1.0);
+            tsprite.setTableSize(text.length,1);
+            tsprite.x = WIDTH / 2 - text.length * 16;
+            tsprite.y = 10;
+            tsprite.setString(0,0,text);
+            plane.attach(tsprite);
+            this.title = tsprite;
+            }
+        },
+    makeTextItem: function(text)
+        {
+        var plane = new SpritePlane();
+        Effect.Port.attach(plane);
+        var tsprite = new TextSprite();
+        tsprite.setFont('Optimer');
+        tsprite.setTracking(1.0,1.0);
+        tsprite.setTableSize(text.length,1);
+        tsprite.x = WIDTH / 2 - text.length * 16;
+        tsprite.y = this.items.length * 40 + 80;
+        tsprite.setString(0,0,text);
+        plane.attach(tsprite);
+        this.items.push([plane, tsprite, null]);
         },
     makeItem: function(text, callback)
         {
@@ -39,7 +76,7 @@ Class.create('AOBMenu', {
                 {
                 var buttonsplane = item[0];
                 var sprite = buttonsplane.lookupSpriteFromGlobal(pt);
-                if ((sprite) && (sprite == item[1])) item[2].call(this);
+                if ((sprite) && (sprite == item[1]) && (item[2])) item[2].call(this);
                 }, this);
             }
         else if (buttonIdx == Effect.RIGHT_BUTTON)
@@ -56,6 +93,7 @@ Class.create('AOBMenu', {
         },
     show: function()
         {
+        if (this.title) this.title.show();
         this.items.forEach(function (i)
             {
             i[0].show();
@@ -63,6 +101,7 @@ Class.create('AOBMenu', {
         },
     hide: function()
         {
+        if (this.title) this.title.hide();
         this.items.forEach(function (i)
             {
             i[0].hide();
@@ -94,6 +133,7 @@ Class.create('AOBMenu', {
 AOBMenu.subclass('MainMenu', {
     makeItems: function()
         {
+        this.setTitle("All On Board - Main Menu");
         this.makeItem('Add Player', function() {this.branchToMenu('newplayer')});
         this.makeItem('Del Player', function() {this.branchToMenu('delplayer')});
         this.makeItem('Restart game', this.restartGame);
@@ -110,6 +150,7 @@ AOBMenu.subclass('MainMenu', {
 AOBMenu.subclass('NewPlayerMenu', {
     makeItems: function()
         {
+        this.setTitle("Add player");
         this.makeItem('Human', this.addHuman);
         this.makeItem('Weighter1', function () {this.addRobot(Weighter1);});
         },
@@ -137,6 +178,7 @@ AOBMenu.subclass('NewPlayerMenu', {
 AOBMenu.subclass('DelPlayerMenu', {
     makeItems: function()
         {
+        this.setTitle("Remove player");
         this.makeItem('Last', this.delLast);
         this.makeItem('All', this.delAll);
         },
