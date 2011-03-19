@@ -27,8 +27,10 @@ Class.create('AOBGame', {
         },
     clearHud: function()
         {
-        this.hud.setString(0,0,"                                             ");
-        this.hud.setString(0,1,"                                             ");
+        for (var r = 0 ; r < 10 ; r ++)
+            {
+            this.hud.setString(0,r,"                                             ");
+            }
         },
     hideAllGame: function()
         {
