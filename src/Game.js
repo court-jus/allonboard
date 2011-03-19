@@ -232,10 +232,14 @@ Class.create('AOBGame', {
                     if (this.isGameActive()) this.pressEndTurnButton();
                     return;
                     }
-                if ((sprite == this.backb) && (this.current_player.selected_dot) && (this.current_player.goingBack))
+                if (sprite == this.backb)
                     {
-                    if (this.isGameActive()) this.validateMove();
-                    return;
+                    if (!this.isGameActive()) return;
+                    if ((this.current_player.selected_dot) && (this.current_player.goingBack))
+                        {
+                        this.validateMove();
+                        return;
+                        }
                     }
                 if (sprite == this.menub)
                     {
