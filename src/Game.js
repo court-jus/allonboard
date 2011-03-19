@@ -52,6 +52,12 @@ Class.create('AOBGame', {
             p.dotsplane.show();
             }, this);
         if (this.current_player) this.current_player.activate();
+        if (this.players.length == 0)
+            {
+            this.clearHud();
+            this.hud.setString(0,0,"You must add players");
+            this.hud.setString(0,1,"to be able to play.");
+            }
         },
     setError: function(text)
         {
