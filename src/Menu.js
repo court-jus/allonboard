@@ -56,7 +56,7 @@ Class.create('AOBMenu', {
         tsprite.setTracking(1.0,1.0);
         tsprite.setTableSize(text.length,1);
         tsprite.x = WIDTH / 2 - text.length * 16;
-        tsprite.y = this.items.length * 40 + 50;
+        tsprite.y = this.items.length * 40 + 80;
         tsprite.setString(0,0,text);
         plane.attach(tsprite);
         this.items.push([plane, tsprite, callback]);
