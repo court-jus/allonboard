@@ -1,4 +1,7 @@
 /* 
+ * Options :
+ * PLAYERS : an array of players for the game (if empty, the game starts on the menu)
+ *
  * Available players :
  *******************************
  * Human
@@ -12,8 +15,4 @@
  */
 
 
-var PLAYERS = [
-    Human,
-    Weighter1,
-    MyRobot,
-    ];
+var PLAYERS = [];
