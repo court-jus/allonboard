@@ -152,7 +152,12 @@ AOBMenu.subclass('NewPlayerMenu', {
         {
         this.setTitle("Add player");
         this.makeItem('Human', this.addHuman);
-        this.makeItem('Weighter1', function () {this.addRobot(Weighter1);});
+        this.makeItem('CPU1', function () {this.addRobot(Weighter1);});
+        this.makeItem('CPU2', function () {this.addRobot(Weighter2);});
+        this.makeItem('CPU3', function () {this.addRobot(Weighter3);});
+        this.makeItem('CPU4', function () {this.addRobot(Weighter4);});
+        this.makeItem('CPU5', function () {this.addRobot(Weighter5);});
+        this.makeItem('CPU6', function () {this.addRobot(Weighter6);});
         },
     addHuman: function()
         {
