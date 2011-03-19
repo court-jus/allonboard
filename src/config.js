@@ -12,7 +12,11 @@
  * Weighter1 to Weighter6 : this robots are smarter
  *******************************
  * MyRobot : the custom robot you can modify in customrobot.js
+ * 
+ * AUTORESTART : a boolean (will the game restart at end)
+ *
  */
 
 
 var PLAYERS = [];
+var AUTORESTART = false;

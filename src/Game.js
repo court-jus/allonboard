@@ -201,7 +201,7 @@ Class.create('AOBGame', {
                 this.clearHud();
                 this.hud.setString(0,0,this.current_player.name + " WON !!!");
                 this.scores[this.current_player.name] += 1;
-                this.endGame(true);
+                this.endGame(AUTORESTART);
                 }
             }
         },
@@ -285,8 +285,9 @@ Class.create('AOBGame', {
         if (this.drawgame == this.players.length)
             {
             console.debug("every one did 'end turn'. Draw Game");
-            this.hud.setString(0,0,"every one did 'end turn'. Draw Game");
-            this.endGame(true);
+            this.hud.setString(0,0,"Every one passed.");
+            this.hud.setString(0,1,"Draw Game.");
+            this.endGame(AUTORESTART);
             }
         this.endTurn();
         },
