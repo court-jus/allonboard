@@ -136,7 +136,7 @@ AOBMenu.subclass('MainMenu', {
         this.setTitle("All On Board - Main Menu");
         this.makeItem('Add Player', function() {this.branchToMenu('newplayer')});
         this.makeItem('Del Player', function() {this.branchToMenu('delplayer')});
-        this.makeItem('Restart game', this.restartGame);
+        this.makeItem('(re)Start game', this.restartGame);
         },
     restartGame: function()
         {
