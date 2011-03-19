@@ -110,8 +110,15 @@ Class.create('AOBGame', {
             this.menus[menuid].linkToGame(this);
             }
         this.active_menu = this.menus['main'];
-        this.game_running = true;
-        this.startTurn();
+        if (this.players.length == 0)
+            {
+            this.openMenu();
+            }
+        else
+            {
+            this.game_running = true;
+            this.startTurn();
+            }
         },
     createMap: function()
         {
@@ -200,6 +207,19 @@ Class.create('AOBGame', {
     level_loaded: function()
         {
         },
+    openMenu: function(menu_name)
+        {
+        this.game_running = false;
+        this.hideAllGame();
+        if (menu_name)
+            {
+            this.menus[menu_name].start()
+            }
+        else
+            {
+            this.active_menu.start();
+            }
+        },
     mouseButtonHandler: function(pt, buttonIdx)
         {
         if (buttonIdx == Effect.LEFT_BUTTON)
@@ -219,9 +239,7 @@ Class.create('AOBGame', {
                     }
                 if (sprite == this.menub)
                     {
-                    this.game_running = false;
-                    this.hideAllGame();
-                    this.active_menu.start();
+                    this.openMenu();
                     return;
                     }
                 }
