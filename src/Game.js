@@ -116,6 +116,14 @@ Class.create('AOBGame', {
         this.menus['newplayer'].parentMenu = this.menus['main'];
         this.menus['delplayer'] = new DelPlayerMenu();
         this.menus['delplayer'].parentMenu = this.menus['main'];
+        this.menus['helpmenu'] = new HelpMenu();
+        this.menus['helpmenu'].parentMenu = this.menus['main'];
+        this.menus['creditsmenu'] = new CreditsMenu();
+        this.menus['creditsmenu'].parentMenu = this.menus['main'];
+        this.menus['helponmenu'] = new HelpOnMenuMenu();
+        this.menus['helponmenu'].parentMenu = this.menus['helpmenu'];
+        this.menus['helprules'] = new HelpOnRulesMenu();
+        this.menus['helprules'].parentMenu = this.menus['helpmenu'];
         for(menuid in this.menus)
             {
             this.menus[menuid].linkToGame(this);

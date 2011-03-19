@@ -134,6 +134,8 @@ AOBMenu.subclass('MainMenu', {
     makeItems: function()
         {
         this.setTitle("All On Board - Main Menu");
+        this.makeItem('Help', function() {this.branchToMenu('helpmenu')});
+        this.makeItem('Credits', function() {this.branchToMenu('creditsmenu')});
         this.makeItem('Add Player', function() {this.branchToMenu('newplayer')});
         this.makeItem('Del Player', function() {this.branchToMenu('delplayer')});
         this.makeItem('(re)Start game', this.restartGame);
@@ -204,5 +206,62 @@ AOBMenu.subclass('DelPlayerMenu', {
             {
             }
         this.game.endGame(false);
+        }
+    });
+
+AOBMenu.subclass('HelpMenu', {
+    makeItems: function()
+        {
+        this.setTitle("All On Board - Help");
+        this.makeItem('Using the menu', function() {this.branchToMenu('helponmenu')});
+        this.makeItem('The game rules and how to play', function() {this.branchToMenu('helprules')});
+        }
+    });
+AOBMenu.subclass('HelpOnMenuMenu', {
+    makeItems: function()
+        {
+        this.setTitle("All On Board - Help");
+        this.makeTextItem('Using the menu');
+        this.makeTextItem('Just left-click items you want');
+        this.makeTextItem('to activate. Right-click to go');
+        this.makeTextItem('back to the previous menu or to');
+        this.makeTextItem('exit the menu and return to the');
+        this.makeTextItem('game.');
+        }
+    });
+AOBMenu.subclass('HelpOnRulesMenu', {
+    makeItems: function()
+        {
+        this.setTitle("All On Board - Help");
+        this.makeTextItem('The goal is to advance your 6');
+        this.makeTextItem('pawns to the end. To advance a');
+        this.makeTextItem('pawn, click it then click a');
+        this.makeTextItem('card on the right. The pawn will');
+        this.makeTextItem('go to the next free cell of');
+        this.makeTextItem('this color. To draw new cards,');
+        this.makeTextItem('click a pawn then click the');
+        this.makeTextItem('\'Back\' button. The pawn will');
+        this.makeTextItem('go back until it finds a cell');
+        this.makeTextItem('containing 1 or 2 pawns. You');
+        this.makeTextItem('will pick up respectively 1 or');
+        this.makeTextItem('2 cards.');
+        }
+    });
+AOBMenu.subclass('CreditsMenu', {
+    makeItems: function()
+        {
+        this.setTitle("All On Board - Credits");
+        this.makeTextItem('Coding - Court-Jus');
+        this.makeTextItem('--');
+        this.makeTextItem('All the nice GFX');
+        this.makeTextItem('(pawns, tiles, some cards)');
+        this.makeTextItem('are from');
+        this.makeTextItem('"Planet Cute" by Daniel Cook');
+        this.makeTextItem('www.lostgarden.com');
+        this.makeTextItem('--');
+        this.makeTextItem('The bad GFX are from me :-/');
+        this.makeTextItem('--');
+        this.makeTextItem('Ghislain \'Court-Jus\' LEVEQUE');
+        this.makeTextItem('ghislain.leveque@gmail.com');
         }
     });
