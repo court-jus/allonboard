@@ -17,7 +17,7 @@ Effect.Game.addEventListener( 'onLoadGame', function() {
     PLAYERS.forEach(function (cls, i)
         {
         p = new cls();
-        p.init((cls == Human ? 'Human' + i : 'Robot' + i), i, i, cls != Human);
+        p.init((cls == Human ? _('Human') + i : _('Robot') + i), i, i, cls != Human);
         players.push(p);
         });
     THEGAME = new AOBGame('AOB', players, thehud);

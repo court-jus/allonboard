@@ -153,20 +153,20 @@ AOBMenu.subclass('NewPlayerMenu', {
     makeItems: function()
         {
         this.setTitle("Add player");
-        this.makeItem('Human', this.addHuman);
-        this.makeItem('CPU1', function () {this.addRobot(Weighter1);});
-        this.makeItem('CPU2', function () {this.addRobot(Weighter2);});
-        this.makeItem('CPU3', function () {this.addRobot(Weighter3);});
-        this.makeItem('CPU4', function () {this.addRobot(Weighter4);});
-        this.makeItem('CPU5', function () {this.addRobot(Weighter5);});
-        this.makeItem('CPU6', function () {this.addRobot(Weighter6);});
+        this.makeItem(_('Human'), this.addHuman);
+        this.makeItem(_('CPU') + '1', function () {this.addRobot(Weighter1);});
+        this.makeItem(_('CPU') + '2', function () {this.addRobot(Weighter2);});
+        this.makeItem(_('CPU') + '3', function () {this.addRobot(Weighter3);});
+        this.makeItem(_('CPU') + '4', function () {this.addRobot(Weighter4);});
+        this.makeItem(_('CPU') + '5', function () {this.addRobot(Weighter5);});
+        this.makeItem(_('CPU') + '6', function () {this.addRobot(Weighter6);});
         },
     addHuman: function()
         {
         if (this.game.players.length == 6) return;
         var i = this.game.players.length;
         var p = new Human();
-        p.init('Human' + i, i, i, false);
+        p.init(_('Human') + i, i, i, false);
         p.linkToGame(this.game);
         this.game.scores[p.name] = 0;
         this.game.players.push(p);
@@ -176,7 +176,7 @@ AOBMenu.subclass('NewPlayerMenu', {
         if (this.game.players.length == 6) return;
         var i = this.game.players.length;
         var p = new cls();
-        p.init('Robot' + i, i, i, true);
+        p.init(_('Robot') + i, i, i, true);
         p.linkToGame(this.game);
         this.game.scores[p.name] = 0;
         this.game.players.push(p);
@@ -185,9 +185,9 @@ AOBMenu.subclass('NewPlayerMenu', {
 AOBMenu.subclass('DelPlayerMenu', {
     makeItems: function()
         {
-        this.setTitle("Remove player");
-        this.makeItem('Last', this.delLast);
-        this.makeItem('All', this.delAll);
+        this.setTitle(_("Remove player"));
+        this.makeItem(_('Last'), this.delLast);
+        this.makeItem(_('All'), this.delAll);
         },
     delLast: function()
         {
