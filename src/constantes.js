@@ -121,7 +121,6 @@ var LAUNCH = -1,
         ]
     ;
     /*
-    CARDNAMES = ['RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard'],
     DEFAULT_DECK = ['RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
                     'RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
                     'RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',

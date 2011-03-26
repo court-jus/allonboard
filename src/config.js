@@ -1,4 +1,7 @@
 /* 
+ * Options :
+ * PLAYERS : an array of players for the game (if empty, the game starts on the menu)
+ *
  * Available players :
  *******************************
  * Human
@@ -9,11 +12,11 @@
  * Weighter1 to Weighter6 : this robots are smarter
  *******************************
  * MyRobot : the custom robot you can modify in customrobot.js
+ * 
+ * AUTORESTART : a boolean (will the game restart at end)
+ *
  */
 
 
-var PLAYERS = [
-    Human,
-    Weighter1,
-    MyRobot,
-    ];
+var PLAYERS = [];
+var AUTORESTART = false;

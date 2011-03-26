@@ -27,12 +27,15 @@ Class.create('AOBGame', {
         },
     clearHud: function()
         {
-        this.hud.setString(0,0,"                                             ");
-        this.hud.setString(0,1,"                                             ");
+        for (var r = 0 ; r < 10 ; r ++)
+            {
+            this.hud.setString(0,r,"                                             ");
+            }
         },
     hideAllGame: function()
         {
-        this.tilesplane.hide();
+        this.tilesplane.setOpacity(0.1);
+        this.buttonsplane.hide();
         this.players.forEach(function (p)
             {
             p.cardsplane.hide();
@@ -42,11 +45,19 @@ Class.create('AOBGame', {
     showGame: function()
         {
         this.tilesplane.show();
+        this.tilesplane.setOpacity(1);
+        this.buttonsplane.show();
         this.players.forEach(function (p)
             {
             p.dotsplane.show();
             }, this);
-        this.current_player.activate();
+        if (this.current_player) this.current_player.activate();
+        if (this.players.length == 0)
+            {
+            this.clearHud();
+            this.hud.setString(0,0,"You must add players");
+            this.hud.setString(0,1,"to be able to play.");
+            }
         },
     setError: function(text)
         {
@@ -105,13 +116,28 @@ Class.create('AOBGame', {
         this.menus['newplayer'].parentMenu = this.menus['main'];
         this.menus['delplayer'] = new DelPlayerMenu();
         this.menus['delplayer'].parentMenu = this.menus['main'];
+        this.menus['helpmenu'] = new HelpMenu();
+        this.menus['helpmenu'].parentMenu = this.menus['main'];
+        this.menus['creditsmenu'] = new CreditsMenu();
+        this.menus['creditsmenu'].parentMenu = this.menus['main'];
+        this.menus['helponmenu'] = new HelpOnMenuMenu();
+        this.menus['helponmenu'].parentMenu = this.menus['helpmenu'];
+        this.menus['helprules'] = new HelpOnRulesMenu();
+        this.menus['helprules'].parentMenu = this.menus['helpmenu'];
         for(menuid in this.menus)
             {
             this.menus[menuid].linkToGame(this);
             }
         this.active_menu = this.menus['main'];
-        this.game_running = true;
-        this.startTurn();
+        if (this.players.length == 0)
+            {
+            this.openMenu();
+            }
+        else
+            {
+            this.game_running = true;
+            this.startTurn();
+            }
         },
     createMap: function()
         {
@@ -159,7 +185,7 @@ Class.create('AOBGame', {
     endGame: function(restart)
         {
         this.game_running = false;
-        this.current_player.endGame(true);
+        if (this.current_player) this.current_player.endGame(true);
         this.players.forEach(function (p) { if (p != this.current_player) p.endGame(false); }, this);
         if (restart) this.restartGame();
         },
@@ -179,6 +205,7 @@ Class.create('AOBGame', {
             p.restartGame();
             });
         this.current_player_index = Math.floor(Math.random() * this.players.length);
+        this.current_player = this.players[this.current_player_index];
         this.game_running = true;
         this.startTurn();
         },
@@ -193,12 +220,27 @@ Class.create('AOBGame', {
                 this.clearHud();
                 this.hud.setString(0,0,this.current_player.name + " WON !!!");
                 this.scores[this.current_player.name] += 1;
-                this.endGame(true);
+                this.endGame(AUTORESTART);
                 }
             }
         },
     level_loaded: function()
         {
+        },
+    openMenu: function(menu_name)
+        {
+        var game_was_running = this.game_running;
+        this.clearHud();
+        this.game_running = false;
+        this.hideAllGame();
+        if (menu_name)
+            {
+            this.menus[menu_name].start(game_was_running);
+            }
+        else
+            {
+            this.active_menu.start();
+            }
         },
     mouseButtonHandler: function(pt, buttonIdx)
         {
@@ -212,16 +254,18 @@ Class.create('AOBGame', {
                     if (this.isGameActive()) this.pressEndTurnButton();
                     return;
                     }
-                if ((sprite == this.backb) && (this.current_player.selected_dot) && (this.current_player.goingBack))
+                if (sprite == this.backb)
                     {
-                    if (this.isGameActive()) this.validateMove();
-                    return;
+                    if (!this.isGameActive()) return;
+                    if ((this.current_player.selected_dot) && (this.current_player.goingBack))
+                        {
+                        this.validateMove();
+                        return;
+                        }
                     }
                 if (sprite == this.menub)
                     {
-                    this.game_running = false;
-                    this.hideAllGame();
-                    this.active_menu.start();
+                    this.openMenu();
                     return;
                     }
                 }
@@ -262,8 +306,9 @@ Class.create('AOBGame', {
         if (this.drawgame == this.players.length)
             {
             console.debug("every one did 'end turn'. Draw Game");
-            this.hud.setString(0,0,"every one did 'end turn'. Draw Game");
-            this.endGame(true);
+            this.hud.setString(0,0,"Every one passed.");
+            this.hud.setString(0,1,"Draw Game.");
+            this.endGame(AUTORESTART);
             }
         this.endTurn();
         },
