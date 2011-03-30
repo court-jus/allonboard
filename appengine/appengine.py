@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
+import os, datetime
 from google.appengine.dist import use_library
 use_library('django', '1.2')
 
@@ -28,6 +28,40 @@ class Participation(db.Model):
     player = db.ReferenceProperty(Player, required = True)
     game = db.ReferenceProperty(Game, required = True)
     status = db.IntegerProperty(choices = PLAYER_STATUS.keys(), required = True, default = PLAYER_INGAME)
+
+def who_calls(request):
+    user = users.get_current_user()
+    p = None
+    nickname = None
+    if user:
+        q = Player.all().filter("user =", user)
+        p = q.get()
+        nickname = request.cookies.get('aob_nickname', user.nickname())
+        if not p:
+            p = Player(nickname = nickname)
+            p.user = user
+            p.registered = True
+            p.put()
+        else:
+            p.nickname = nickname
+            p.last_use = datetime.datetime.now()
+            p.put()
+    else:
+        nickname = request.cookies.get('aob_nickname')
+        if nickname:
+            q = Player.all().filter("nickname =", nickname).filter("user =", None)
+            p = q.get()
+            if not p:
+                p = Player(nickname = nickname)
+                p.user = None
+                p.nickname = nickname
+                p.registered = False
+                p.put()
+            else:
+                p.last_use = datetime.datetime.now()
+                p.put()
+    return {'user': user, 'nickname' : nickname, 'player': p}
+
 class MainPage(webapp.RequestHandler):
     def get(self):
         user = users.get_current_user()
