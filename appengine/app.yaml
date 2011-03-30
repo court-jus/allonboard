@@ -4,5 +4,14 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /css
+  static_dir: media/css
+
+- url: /js
+  static_dir: media/js
+
+- url: /img
+  static_dir: media/img
+
 - url: /.*
   script: appengine.py
