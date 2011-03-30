@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+Bienvenue{% if who.nickname %}, {{ who.nickname }}{% endif %}.
+{% if who.user %}Merci de vous être enregistré.{% endif %}
+<div id="change_user_info">
+<form action="#" method="get" onSubmit="return setNickname(this);">
+    <table>
+        <tr><th>Pseudo</th><td><input type="text" id="nickname" name="nickname" value="{{ who.nickname|default:"" }}"/></td></tr>
+        <tr><th colspan="2"><input type="submit" value="Enregistrer"/></th></tr>
+    </table>
+</form>
+<a href="{{ login_url }}">Se connecter avec un compte Google ou OpenID</a>
+</div>
+{% endblock %}

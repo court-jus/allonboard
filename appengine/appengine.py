@@ -64,16 +64,14 @@ def who_calls(request):
 
 class MainPage(webapp.RequestHandler):
     def get(self):
-        user = users.get_current_user()
+        who = who_calls(self.request)
+        template_values = {
+            'who': who,
+            'login_url': users.create_login_url(self.request.url),
+            }
 
-        if user:
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.out.write('Hello, %s World!' % (user.nickname(),))
-        elif LOGIN_REQUIRED:
-            self.redirect(users.create_login_url(self.request.uri))
-        else:
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.out.write('Hello, %s World!' % ("anonymous",))
+        path = os.path.join(TEMPLATE_DIR, 'index.html')
+        self.response.out.write(template.render(path, template_values))
 
 class GamePage(webapp.RequestHandler):
     def get(self):
