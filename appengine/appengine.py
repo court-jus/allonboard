@@ -89,16 +89,17 @@ class GamePage(webapp.RequestHandler):
         self.response.out.write('Hello, %s World!' % (game.name,))
 class PlayerPage(webapp.RequestHandler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        user = users.get_current_user()
-        q = Player.all().filter("user =", user)
-        p = q.get()
-        if not p:
-            nickname = self.request.cookies.get('aob_nickname')
-            q = Player.all().filter("nickname =", nickname)
-            p = q.get()
+        who = who_calls(self.request)
+        q = Player.all()
 
-        self.response.out.write("Hello, you are %s %s %s" % (p,user,nickname,))
+        template_values = {
+            'who': who,
+            'players': q,
+            }
+
+        path = os.path.join(TEMPLATE_DIR, 'players.html')
+        self.response.out.write(template.render(path, template_values))
+
 class LogoutPage(webapp.RequestHandler):
     def get(self):
         self.redirect(users.create_logout_url('/'))

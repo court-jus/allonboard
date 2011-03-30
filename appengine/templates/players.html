@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>Nickname</th>
+            <td>Compte google ou OpenId</td>
+            <td>Enregistré</td>
+            <td>Date de création</td>
+            <td>Dernière utilisation</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in players %}
+            <tr>
+                <th>{{ p.nickname }}</th>
+                <td>{{ p.user|default:"" }}</td>
+                <td>{{ p.registered }}</td>
+                <td>{{ p.creation }}</td>
+                <td>{{ p.last_use }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
