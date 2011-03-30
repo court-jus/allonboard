@@ -21,6 +21,8 @@ class Player(db.Model):
     nickname = db.StringProperty(required = True)
     registered = db.BooleanProperty(required = True, default = False)
     user = db.UserProperty()
+    creation = db.DateTimeProperty(required = True, auto_now_add = True)
+    last_use = db.DateTimeProperty(required = True, auto_now_add = True)
 class Participation(db.Model):
     # Represents and user participation into a Game
     player = db.ReferenceProperty(Player, required = True)
