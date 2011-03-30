@@ -65,7 +65,7 @@ class PlayerPage(webapp.RequestHandler):
         self.response.out.write("Hello, you are %s %s %s" % (p,user,nickname,))
 class LogoutPage(webapp.RequestHandler):
     def get(self):
-        self.redirect(users.create_logout_url('/player/'))
+        self.redirect(users.create_logout_url('/'))
 
 
 application = webapp.WSGIApplication(
