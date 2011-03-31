@@ -4,6 +4,8 @@ import os, datetime
 from google.appengine.dist import use_library
 use_library('django', '1.2')
 
+from django.utils import simplejson as json
+
 from google.appengine.api import users
 from google.appengine.ext import webapp, db
 from google.appengine.ext.webapp import template
@@ -97,12 +99,17 @@ class LogoutPage(webapp.RequestHandler):
     def get(self):
         self.redirect(users.create_logout_url('/'))
 
+class WebService(webapp.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.out.write(json.dumps({'plop':'plaf','liste':[1,2,3,'12']}))
 
 application = webapp.WSGIApplication(
     [
         ('/player/logout/', LogoutPage),
         ('/player/', PlayerPage),
         ('/game/', GamePage),
+        ('/webs/', WebService),
         ('/', MainPage),
     ],
     debug = True)
