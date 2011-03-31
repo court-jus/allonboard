@@ -103,17 +103,37 @@ class LogoutPage(webapp.RequestHandler):
     def get(self):
         self.redirect(users.create_logout_url('/'))
 
-class WebService(webapp.RequestHandler):
+class LoadGame(webapp.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write(json.dumps({'plop':'plaf','liste':[1,2,3,'12']}))
+        result = {
+            "name": None,
+            "deck": [],
+            "players": [],
+            "status": None,
+            }
+        gq = Game.all()
+        if gq.count() == 0:
+            game = Game()
+            game.name="test game"
+            game.deck=DEFAULT_DECK
+            game.put()
+        else:
+            game = gq[0]
+        result.update({
+            "name": game.name,
+            "status": game.status,
+            "deck": game.deck,
+            "cards": game.cards,
+            })
+        self.response.out.write(json.dumps(result))
 
 application = webapp.WSGIApplication(
     [
         ('/player/logout/', LogoutPage),
         ('/player/', PlayerPage),
         ('/game/', GamePage),
-        ('/webs/', WebService),
+        ('/webs/loadgame/', LoadGame),
         ('/', MainPage),
     ],
     debug = True)

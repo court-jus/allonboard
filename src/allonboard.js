@@ -21,5 +21,5 @@ Effect.Game.addEventListener( 'onLoadGame', function() {
         players.push(p);
         });
     THEGAME = new AOBGame('AOB', players, thehud);
-    THEGAME.launch();
+    loadgame(THEGAME);
     });
