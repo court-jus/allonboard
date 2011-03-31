@@ -16,7 +16,8 @@ Class.create('AOBGame', {
         this.current_error_message = "";
         this.drawgame = 0;
         this.turns_without_a_victory = 0;
-        this.cards = DEFAULT_DECK.slice();
+        this.deck = DEFAULT_DECK;
+        this.cards = this.deck.slice();
         this.shuffleCards();
         for (var i = 0; i < this.players.length ; i ++ )
             {
@@ -80,7 +81,7 @@ Class.create('AOBGame', {
         var drawncard = this.cards.pop();
         if (this.cards.length == 0)
             {
-            this.cards = DEFAULT_DECK.slice();
+            this.cards = this.deck.slice();
             this.shuffleCards();
             }
         return drawncard;
@@ -198,7 +199,7 @@ Class.create('AOBGame', {
         this.showScores();
         this.current_error_message = "";
         this.drawgame = 0;
-        this.cards = DEFAULT_DECK.slice();
+        this.cards = this.deck.slice();
         this.shuffleCards();
         this.players.forEach(function(p,i,ps)
             {
