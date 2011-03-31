@@ -18,6 +18,8 @@ class Game(db.Model):
     # Represents an AllOnBoard game
     name = db.StringProperty()
     status = db.IntegerProperty(choices = GAME_STATUS.keys())
+    deck = db.ListProperty(int)
+    cards = db.ListProperty(int)
 class Player(db.Model):
     # Represents a player (may be anonymous or have a google account)
     nickname = db.StringProperty(required = True)
@@ -25,6 +27,8 @@ class Player(db.Model):
     user = db.UserProperty()
     creation = db.DateTimeProperty(required = True, auto_now_add = True)
     last_use = db.DateTimeProperty(required = True, auto_now_add = True)
+    cards = db.ListProperty(int)
+    dots = db.ListProperty(int)
 class Participation(db.Model):
     # Represents and user participation into a Game
     player = db.ReferenceProperty(Player, required = True)
