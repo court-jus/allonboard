@@ -26,6 +26,19 @@ Class.create('AOBGame', {
             }
         this.current_player_index = Math.floor(Math.random() * players.length);
         },
+    apply_state: function(config)
+        {
+        this.deck = [];
+        config.deck.forEach(function (a)
+            {
+            this.deck.push(CARD_CLASSES[a]);
+            }, this);
+        this.cards = [];
+        config.cards.forEach(function (a)
+            {
+            this.cards.push(CARD_CLASSES[a]);
+            }, this);
+        },
     clearHud: function()
         {
         for (var r = 0 ; r < 10 ; r ++)
