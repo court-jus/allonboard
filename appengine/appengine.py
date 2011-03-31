@@ -75,16 +75,11 @@ class MainPage(webapp.RequestHandler):
 
 class GamePage(webapp.RequestHandler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        gq = Game.all()
-        if gq.count() == 0:
-            game = Game()
-            game.name="test game"
-            game.put()
-            self.response.out.write('creation')
-        else:
-            game = gq[0]
-        self.response.out.write('Hello, %s World!' % (game.name,))
+        # Just display the game
+        template_values = {}
+        path = os.path.join(TEMPLATE_DIR, 'game.html')
+        self.response.out.write(template.render(path, template_values))
+
 class PlayerPage(webapp.RequestHandler):
     def get(self):
         who = who_calls(self.request)

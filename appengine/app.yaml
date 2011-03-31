@@ -13,5 +13,8 @@ handlers:
 - url: /img
   static_dir: media/img
 
+- url: /aob
+  static_dir: media/aob
+
 - url: /.*
   script: appengine.py
