@@ -1,3 +1,7 @@
+//@+leo-ver=5-thin
+//@+node:celine.20110401213457.1807: * @file Menu.js
+//@@language javascript
+//@@tabwidth -4
 Class.create('AOBMenu', {
     __construct: function()
         {
@@ -265,3 +269,7 @@ AOBMenu.subclass('CreditsMenu', {
         this.makeTextItem('ghislain.leveque@gmail.com');
         }
     });
+
+//@+others
+//@-others
+//@-leo

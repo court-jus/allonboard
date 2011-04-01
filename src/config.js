@@ -1,4 +1,10 @@
-/* 
+//@+leo-ver=5-thin
+//@+node:celine.20110401213457.1802: * @file config.js
+//@@language javascript
+//@@tabwidth -4
+//@+others
+//@+node:celine.20110401213457.6022: ** config declarations
+/*
  * Options :
  * PLAYERS : an array of players for the game (if empty, the game starts on the menu)
  *
@@ -20,3 +26,5 @@
 
 var PLAYERS = [];
 var AUTORESTART = false;
+//@-others
+//@-leo

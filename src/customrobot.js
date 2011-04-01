@@ -1,3 +1,9 @@
+//@+leo-ver=5-thin
+//@+node:celine.20110401213457.1804: * @file customrobot.js
+//@@language javascript
+//@@tabwidth -4
+//@+others
+//@+node:celine.20110401213457.6020: ** customrobot declarations
 /*
  * MyRobot is a robot you can customize
  *
@@ -30,3 +36,5 @@ AOBPlayer.subclass('MyRobot', {
         return options[0];
         },
     });
+//@-others
+//@-leo

@@ -1,8 +1,15 @@
+//@+leo-ver=5-thin
+//@+node:celine.20110401213457.1808: * @file Player.js
+//@@language javascript
+//@@tabwidth -4
 // All On Board
 // Created January 17, 2011 9:17:39 PM
 // Copyright (c) 2011 Ghislain Leveque
-
+//@+others
+//@+node:celine.20110401213457.6084: ** Class AOBPlayer
 Class.create('AOBPlayer', {
+    //@+others
+    //@+node:celine.20110401213457.6108: *3* init
     init: function(name, color, id, robotic)
         {
         this.name = name;
@@ -18,7 +25,8 @@ Class.create('AOBPlayer', {
         if (robotic !== undefined) this.robotic = robotic;
         if (this.custominit) this.custominit.call(this);
         },
-    restartGame: function() 
+    //@+node:celine.20110401213457.6107: *3* restartGame
+    restartGame: function()
         {
         this.dots.forEach(function (d,i,ds)
             {
@@ -29,6 +37,7 @@ Class.create('AOBPlayer', {
         this.inactivate();
         this.drawCard(STARTING_CARDS);
         },
+    //@+node:celine.20110401213457.6106: *3* linkToGame
     linkToGame: function (game)
         {
         this.game = game;
@@ -47,6 +56,7 @@ Class.create('AOBPlayer', {
         this.inactivate();
         this.drawCard(STARTING_CARDS);
         },
+    //@+node:celine.20110401213457.6105: *3* drawCard
     drawCard: function(count)
         {
         if (this.game === null) return;
@@ -64,6 +74,7 @@ Class.create('AOBPlayer', {
                 }
             }
         },
+    //@+node:celine.20110401213457.6104: *3* withdrawCard
     withdrawCard: function (card)
         {
         var removed = [];
@@ -84,11 +95,13 @@ Class.create('AOBPlayer', {
             });
         return removed_names;
         },
+    //@+node:celine.20110401213457.6103: *3* activate
     activate: function ()
         {
         this.dotsplane.show();
         this.cardsplane.show();
         },
+    //@+node:celine.20110401213457.6102: *3* changeMyDotsZIndex
     changeMyDotsZIndex: function(z)
         {
         for (var i = 0; i < DOTS_PER_PLAYER; i ++)
@@ -97,6 +110,7 @@ Class.create('AOBPlayer', {
             }
         this.indicator_dot.setZIndex(z);
         },
+    //@+node:celine.20110401213457.6101: *3* inactivate
     inactivate: function()
         {
         this.unselectAll();
@@ -104,6 +118,7 @@ Class.create('AOBPlayer', {
         this.cardsplane.hide();
         this.indicator_dot.go_toScreenPosition(SLEEPING_INDICATOR_POSITION.x, SLEEPING_INDICATOR_POSITION.y);
         },
+    //@+node:celine.20110401213457.6100: *3* isThereAnybodyOutThere
     isThereAnybodyOutThere: function(position)
         {
         for (var i = 0 ; i < DOTS_PER_PLAYER; i ++)
@@ -115,6 +130,7 @@ Class.create('AOBPlayer', {
             }
         return false;
         },
+    //@+node:celine.20110401213457.6099: *3* howManyDotsHere
     howManyDotsHere: function(position)
         {
         var count = 0;
@@ -127,6 +143,7 @@ Class.create('AOBPlayer', {
             }
         return count;
         },
+    //@+node:celine.20110401213457.6098: *3* whoIsHere
     whoIsHere: function(position)
         {
         var who = [];
@@ -139,6 +156,7 @@ Class.create('AOBPlayer', {
             }
         return who;
         },
+    //@+node:celine.20110401213457.6097: *3* unselectAll
     unselectAll: function()
         {
         if (this.selected_dot)
@@ -154,6 +172,7 @@ Class.create('AOBPlayer', {
         this.goingBack = false;
         this.indicator_dot.go_toScreenPosition(SLEEPING_INDICATOR_POSITION.x, SLEEPING_INDICATOR_POSITION.y);
         },
+    //@+node:celine.20110401213457.6096: *3* mouseButtonHandler
     mouseButtonHandler: function(pt, buttonIdx)
         {
         if (buttonIdx == Effect.RIGHT_BUTTON)
@@ -195,6 +214,7 @@ Class.create('AOBPlayer', {
             this.game.validateMove();
             }
         },
+    //@+node:celine.20110401213457.6095: *3* mouseMoveHandler
     mouseMoveHandler: function(pt, mouseEvent)
         {
         if (this.selected_dot)
@@ -214,6 +234,7 @@ Class.create('AOBPlayer', {
                 }
             }
         },
+    //@+node:celine.20110401213457.6094: *3* checkWinCondition
     checkWinConditions: function()
         {
         for (var i = 0 ; i < this.dots.length; i ++)
@@ -222,6 +243,7 @@ Class.create('AOBPlayer', {
             }
         return true;
         },
+    //@+node:celine.20110401213457.6093: *3* startTurn
     startTurn: function()
         {
         this.goingBack = false;
@@ -236,6 +258,7 @@ Class.create('AOBPlayer', {
             this.robotStartTurn();
             }
         },
+    //@+node:celine.20110401213457.6092: *3* robotStartTurn
     robotStartTurn: function()
         {
         var nextmove = this.chooseNextMove();
@@ -273,14 +296,17 @@ Class.create('AOBPlayer', {
                 }
             }
         },
+    //@+node:celine.20110401213457.6091: *3* endTurn
     endTurn: function()
         {
         this.inactivate();
         this.changeMyDotsZIndex(100);
         },
+    //@+node:celine.20110401213457.6090: *3* endGame
     endGame: function(winner)
         {
         },
+    //@+node:celine.20110401213457.6089: *3* whatAreMyOptions
     whatAreMyOptions: function(dots, cards)
         {
         var options = [];
@@ -299,6 +325,7 @@ Class.create('AOBPlayer', {
             }, this);
         return options;
         },
+    //@+node:celine.20110401213457.6088: *3* scoreBasedOnOption
     scoreBasedOnOption: function(option)
         {
         var dotsi = [];
@@ -323,6 +350,7 @@ Class.create('AOBPlayer', {
             });
         return this.game.calculateScore(dotsi, cardsc);
         },
+    //@+node:celine.20110401213457.6087: *3* weightedScore
     weightedScore: function(before, after, weights)
         {
         var sb = this.scoreBasedOnOption(before);
@@ -360,6 +388,7 @@ Class.create('AOBPlayer', {
         // console.debug("SCORE" , score);
         return score;
         },
+    //@+node:celine.20110401213457.6086: *3* chooseBestFromWeights
     chooseBestFromWeights: function(weights)
         {
         var scoremax = -99999,
@@ -379,13 +408,15 @@ Class.create('AOBPlayer', {
         // console.debug("I chose option with score",scoremax);
         return choosen;
         },
+    //@+node:celine.20110401213457.6085: *3* debugG
     debugG: function()
         {
         var choosen = this.chooseBestFromWeights(WEIGHTS_1);
         // console.debug("Choosen",choosen.dot.mapindex, (choosen.goingBack ? "back" : choosen.card.type));
         },
+    //@-others
     });
-
+//@+node:celine.20110401213457.6109: ** subclasses
 AOBPlayer.subclass('Human', {});
 AOBPlayer.subclass('Robot', {
     chooseNextMove: function()
@@ -394,6 +425,8 @@ AOBPlayer.subclass('Robot', {
         return options[Math.floor(Math.random() * options.length)];
         },
     });
+//@+others
+//@+node:celine.20110401213457.6110: *3* algorithmic bots
 
 AOBPlayer.subclass('Runner', {
     chooseNextMove: function()
@@ -494,6 +527,7 @@ AOBPlayer.subclass('KidGardener', {
         return choosen_option;
         },
     });
+//@+node:celine.20110401213457.6111: *3* weighter bots
 AOBPlayer.subclass('Weighter1', {
     chooseNextMove: function()
         {
@@ -530,3 +564,7 @@ AOBPlayer.subclass('Weighter6', {
         return this.chooseBestFromWeights(makeWeightFromArray(WEIGHTS[5]));
         },
     });
+//@-others
+//@-others
+
+//@-leo

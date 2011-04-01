@@ -1,20 +1,31 @@
+#@+leo-ver=5-thin
+#@+node:celine.20110401205125.1778: * @file app.yaml
+#@@language yaml
+#@+others
+#@+node:celine.20110401205125.1779: ** configuration
 application: cjallonboard
 version: 1
 runtime: python
 api_version: 1
-
+#@+node:celine.20110401205125.1780: ** url handlers
 handlers:
+#@+others
+#@+node:celine.20110401205125.1781: *3* static media
+#@+node:celine.20110401205125.1785: *4* css
 - url: /css
   static_dir: media/css
-
+#@+node:celine.20110401205125.1783: *4* js
 - url: /js
   static_dir: media/js
-
+#@+node:celine.20110401205125.1784: *4* img
 - url: /img
   static_dir: media/img
-
+#@+node:celine.20110401205125.1782: *4* aob
 - url: /aob
   static_dir: media/aob
-
+#@+node:celine.20110401205125.1786: *3* pages
 - url: /.*
   script: appengine.py
+#@-others
+#@-others
+#@-leo

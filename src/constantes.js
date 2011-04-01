@@ -1,3 +1,9 @@
+//@+leo-ver=5-thin
+//@+node:celine.20110401213457.1803: * @file constantes.js
+//@@language javascript
+//@@tabwidth -4
+//@+others
+//@+node:celine.20110401213457.6021: ** constantes declarations
 // All On Board
 // Created January 17, 2011 9:17:39 PM
 // modifier dimanche 6 mars 2011, 21:44:15 (UTC+0100)
@@ -120,6 +126,7 @@ var LAUNCH = -1,
         [   6,   1,  20,   1,  16,  18,0.10, 0.1], //  4/102 = 0.039
         ]
     ;
+//@-others
     /*
     DEFAULT_DECK = ['RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
                     'RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
@@ -128,3 +135,4 @@ var LAUNCH = -1,
                     'RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard',
                     'RedCard','GreenCard','BlueCard','BrownCard','WhiteCard','BlackCard'],
                     */
+//@-leo

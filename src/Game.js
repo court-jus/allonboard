@@ -1,9 +1,15 @@
+//@+leo-ver=5-thin
+//@+node:celine.20110401213457.1806: * @file Game.js
+//@@language javascript
+//@@tabwidth -4
 // All On Board
 // Created January 17, 2011 9:17:39 PM
 // Modified dimanche 6 mars 2011, 21:30:33 (UTC+0100)
 // Copyright (c) 2011 Ghislain Leveque
 
 Class.create('AOBGame', {
+    //@+others
+    //@+node:celine.20110401213457.6023: ** constructor
     __construct: function (name, players, hud)
         {
         this.name = name;
@@ -26,6 +32,7 @@ Class.create('AOBGame', {
             }
         this.current_player_index = Math.floor(Math.random() * players.length);
         },
+    //@+node:celine.20110401213457.6024: ** apply state
     apply_state: function(config)
         {
         this.deck = [];
@@ -39,6 +46,7 @@ Class.create('AOBGame', {
             this.cards.push(CARD_CLASSES[a]);
             }, this);
         },
+    //@+node:celine.20110401213457.6025: ** clear HUD
     clearHud: function()
         {
         for (var r = 0 ; r < 10 ; r ++)
@@ -46,6 +54,7 @@ Class.create('AOBGame', {
             this.hud.setString(0,r,"                                             ");
             }
         },
+    //@+node:celine.20110401213457.6026: ** hide game
     hideAllGame: function()
         {
         this.tilesplane.setOpacity(0.1);
@@ -56,6 +65,7 @@ Class.create('AOBGame', {
             p.dotsplane.hide();
             }, this);
         },
+    //@+node:celine.20110401213457.6027: ** show game
     showGame: function()
         {
         this.tilesplane.show();
@@ -73,11 +83,13 @@ Class.create('AOBGame', {
             this.hud.setString(0,1,"to be able to play.");
             }
         },
+    //@+node:celine.20110401213457.6028: ** set error
     setError: function(text)
         {
         this.hud.setString(0,1,"                                             ");
         if (text) this.hud.setString(0,1,text);
         },
+    //@+node:celine.20110401213457.6029: ** show scores
     showScores: function()
         {
         var t = '';
@@ -89,6 +101,7 @@ Class.create('AOBGame', {
             }, this);
         console.debug(t, "total : ", total);
         },
+    //@+node:celine.20110401213457.6030: ** draw card
     drawCard: function()
         {
         var drawncard = this.cards.pop();
@@ -99,10 +112,12 @@ Class.create('AOBGame', {
             }
         return drawncard;
         },
+    //@+node:celine.20110401213457.6031: ** shuffle cards
     shuffleCards: function()
         {
         this.cards = shuffle(this.cards);
         },
+    //@+node:celine.20110401213457.6032: ** launch
     launch: function ()
         {
         // Effect.Game.loadLevel(this.level, [this, this.level_loaded]);
@@ -153,6 +168,7 @@ Class.create('AOBGame', {
             this.startTurn();
             }
         },
+    //@+node:celine.20110401213457.6033: ** create map
     createMap: function()
         {
         MAP_COLORS.forEach(function (mc, i, mcs)
@@ -167,6 +183,7 @@ Class.create('AOBGame', {
                 }
             }, this);
         },
+    //@+node:celine.20110401213457.6034: ** start turn
     startTurn: function()
         {
         if (!this.isGameActive()) return;
@@ -183,6 +200,7 @@ Class.create('AOBGame', {
             }
         this.current_player.startTurn();
         },
+    //@+node:celine.20110401213457.6035: ** end turn
     endTurn: function()
         {
         this.current_player.endTurn();
@@ -190,12 +208,14 @@ Class.create('AOBGame', {
         this.checkWinConditions();
         this.startTurn();
         },
+    //@+node:celine.20110401213457.6036: ** next player
     nextPlayer: function()
         {
         this.current_player_index += 1;
         if (this.current_player_index >= this.players.length)
             this.current_player_index = 0;
         },
+    //@+node:celine.20110401213457.6037: ** end game
     endGame: function(restart)
         {
         this.game_running = false;
@@ -203,10 +223,12 @@ Class.create('AOBGame', {
         this.players.forEach(function (p) { if (p != this.current_player) p.endGame(false); }, this);
         if (restart) this.restartGame();
         },
+    //@+node:celine.20110401213457.6038: ** is game active
     isGameActive: function()
         {
         return ((this.game_running) && (this.players.length > 0));
         },
+    //@+node:celine.20110401213457.6039: ** restart game
     restartGame: function()
         {
         this.showScores();
@@ -223,6 +245,7 @@ Class.create('AOBGame', {
         this.game_running = true;
         this.startTurn();
         },
+    //@+node:celine.20110401213457.6040: ** check win condition
     checkWinConditions: function()
         {
         var p, i;
@@ -238,9 +261,11 @@ Class.create('AOBGame', {
                 }
             }
         },
+    //@+node:celine.20110401213457.6041: ** level loaded
     level_loaded: function()
         {
         },
+    //@+node:celine.20110401213457.6042: ** open menu
     openMenu: function(menu_name)
         {
         var game_was_running = this.game_running;
@@ -256,10 +281,13 @@ Class.create('AOBGame', {
             this.active_menu.start();
             }
         },
+    //@+node:celine.20110401213457.6043: ** mouse button handler
     mouseButtonHandler: function(pt, buttonIdx)
         {
         if (buttonIdx == Effect.LEFT_BUTTON)
             {
+            //@+<< left button >>
+            //@+node:celine.20110401213457.6044: *3* << left button >>
             var sprite = this.buttonsplane.lookupSpriteFromGlobal(pt);
             if (sprite)
                 {
@@ -283,14 +311,19 @@ Class.create('AOBGame', {
                     return;
                     }
                 }
+            //@-<< left button >>
             }
         else if (buttonIdx == Effect.RIGHT_BUTTON)
             {
+            //@+<< right button >>
+            //@+node:celine.20110401213457.6045: *3* << right button >>
             this.setError();
+            //@-<< right button >>
             }
         if (this.isGameActive()) this.current_player.mouseButtonHandler(pt, buttonIdx);
         this.active_menu.mouseButtonHandler(pt, buttonIdx);
         },
+    //@+node:celine.20110401213457.6046: ** validate move
     validateMove: function()
         {
         this.drawgame = 0;
@@ -314,6 +347,7 @@ Class.create('AOBGame', {
                 }
             }
         },
+    //@+node:celine.20110401213457.6047: ** press end turn button
     pressEndTurnButton: function()
         {
         this.drawgame += 1;
@@ -326,6 +360,7 @@ Class.create('AOBGame', {
             }
         this.endTurn();
         },
+    //@+node:celine.20110401213457.6048: ** mouse move handler
     mouseMoveHandler: function(pt, mouseEvent)
         {
         if (!this.isGameActive()) return;
@@ -349,6 +384,7 @@ Class.create('AOBGame', {
             }
         this.current_player.mouseMoveHandler(pt, mouseEvent);
         },
+    //@+node:celine.20110401213457.6050: ** is there anybody out there
     isThereAnybodyOutThere: function(position)
         {
         for (var i = 0; i < this.players.length ; i ++)
@@ -360,6 +396,7 @@ Class.create('AOBGame', {
             }
         return false;
         },
+    //@+node:celine.20110401213457.6051: ** how many dots here
     howManyDotsHere: function(position)
         {
         var count = 0;
@@ -369,7 +406,8 @@ Class.create('AOBGame', {
             }
         return count;
         },
-    whoIsHere: function(position)   
+    //@+node:celine.20110401213457.6052: ** who is here
+    whoIsHere: function(position)
         {
         var who = [];
         for (var i = 0; i < this.players.length ; i ++)
@@ -378,6 +416,7 @@ Class.create('AOBGame', {
             }
         return who;
         },
+    //@+node:celine.20110401213457.6053: ** find next position
     findNextPosition: function(dotmapindex, cardcolor)
         {
         var cc = cardcolor,
@@ -391,6 +430,7 @@ Class.create('AOBGame', {
             }
         return LANDHERE;
         },
+    //@+node:celine.20110401213457.6054: ** find back position
     findBackPosition: function(dotmapindex)
         {
         var di = dotmapindex;
@@ -405,6 +445,7 @@ Class.create('AOBGame', {
             }
         return null;
         },
+    //@+node:celine.20110401213457.6055: ** calculate score
     calculateScore: function(dots, cards)
         {
         // calculates a "score" for a given position
@@ -434,4 +475,6 @@ Class.create('AOBGame', {
             group: group
             };
         },
+    //@-others
     });
+//@-leo
