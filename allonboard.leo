@@ -19,12 +19,21 @@
 <v t="celine.20110401205125.1776" a="E"><vh>Google App Engine</vh>
 <v t="celine.20110401205125.1777" a="E"><vh>@path appengine</vh>
 <v t="celine.20110401205125.1778"><vh>@file app.yaml</vh></v>
-<v t="celine.20110401205125.1787" a="E"
-expanded="celine.20110401205125.1824,"><vh>@file appengine.py</vh></v>
+<v t="celine.20110401205125.1787" a="E"><vh>@file appengine.py</vh></v>
 <v t="celine.20110401205125.1788"><vh>@file constants.py</vh></v>
+<v t="celine.20110401213457.6112" a="E"><vh>Templates and website</vh>
+<v t="celine.20110401213457.6113" a="E"><vh>@path templates</vh>
+<v t="celine.20110401213457.6114" a="E"
+expanded="celine.20110401213457.6116,celine.20110401213457.6117,celine.20110401213457.6138,"><vh>@file base.html</vh></v>
+<v t="celine.20110401213457.6119" a="E"><vh>@file game.html</vh></v>
+<v t="celine.20110401213457.6121" a="E"
+expanded="celine.20110401213457.6122,celine.20110401213457.6123,"><vh>@file index.html</vh></v>
+<v t="celine.20110401213457.6125" a="E"><vh>@file players.html</vh></v>
 </v>
 </v>
-<v t="celine.20110401205125.1825" a="E"><vh>JS</vh>
+</v>
+</v>
+<v t="celine.20110401205125.1825"><vh>JS</vh>
 <v t="celine.20110401205125.1828" a="E"><vh>@path src</vh>
 <v t="celine.20110401213457.1809"><vh>@file sprites.js</vh></v>
 <v t="celine.20110401213457.1808"
@@ -88,5 +97,7 @@ var THEGAME = null;
     THEGAME = new AOBGame('AOB', players, thehud);
     loadgame(THEGAME);
     }</t>
+<t tx="celine.20110401213457.6112"></t>
+<t tx="celine.20110401213457.6113"></t>
 </tnodes>
 </leo_file>

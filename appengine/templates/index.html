@@ -1,15 +1,31 @@
+<!--@+leo-ver=5-thin-->
+<!--@+node:celine.20110401213457.6121: * @file index.html-->
+<!--@@language xml-->
+<!--@@tabwidth -4-->
+<!--@+<< extends >>-->
+<!--@+node:celine.20110401213457.6134: ** << extends >>-->
 {% extends "base.html" %}
-
+<!--@-<< extends >>-->
 {% block content %}
+<!--@+<< content >>-->
+<!--@+node:celine.20110401213457.6122: ** << content >>-->
 Bienvenue{% if who.nickname %}, {{ who.nickname }}{% endif %}.
 {% if who.user %}Merci de vous être enregistré.{% endif %}
+<!--@+others-->
+<!--@+node:celine.20110401213457.6123: *3* div-->
 <div id="change_user_info">
 <form action="#" method="get" onSubmit="return setNickname(this);">
+    <!--@+others-->
+    <!--@+node:celine.20110401213457.6124: *4* table-->
     <table>
         <tr><th>Pseudo</th><td><input type="text" id="nickname" name="nickname" value="{{ who.nickname|default:"" }}"/></td></tr>
         <tr><th colspan="2"><input type="submit" value="Enregistrer"/></th></tr>
     </table>
+    <!--@-others-->
 </form>
 <a href="{{ login_url }}">Se connecter avec un compte Google ou OpenID</a>
 </div>
+<!--@-others-->
+<!--@-<< content >>-->
 {% endblock %}
+<!--@-leo-->

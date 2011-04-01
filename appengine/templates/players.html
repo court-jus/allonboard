@@ -1,8 +1,18 @@
+<!--@+leo-ver=5-thin-->
+<!--@+node:celine.20110401213457.6125: * @file players.html-->
+<!--@@language xml-->
+<!--@@tabwidth -4-->
+<!--@+<< extends >>-->
+<!--@+node:celine.20110401213457.6132: ** << extends >>-->
 {% extends "base.html" %}
-
+<!--@-<< extends >>-->
 {% block content %}
+<!--@+<< content >>-->
+<!--@+node:celine.20110401213457.6127: ** << content >>-->
 <table>
     <thead>
+        <!--@+<< thead >>-->
+        <!--@+node:celine.20110401213457.6128: *3* << thead >>-->
         <tr>
             <th>Nickname</th>
             <td>Compte google ou OpenId</td>
@@ -10,8 +20,11 @@
             <td>Date de création</td>
             <td>Dernière utilisation</td>
         </tr>
+        <!--@-<< thead >>-->
     </thead>
     <tbody>
+        <!--@+<< tbody >>-->
+        <!--@+node:celine.20110401213457.6129: *3* << tbody >>-->
         {% for p in players %}
             <tr>
                 <th>{{ p.nickname }}</th>
@@ -21,6 +34,9 @@
                 <td>{{ p.last_use }}</td>
             </tr>
         {% endfor %}
+        <!--@-<< tbody >>-->
     </tbody>
 </table>
+<!--@-<< content >>-->
 {% endblock %}
+<!--@-leo-->
