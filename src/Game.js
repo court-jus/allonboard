@@ -13,6 +13,7 @@ Class.create('AOBGame', {
     __construct: function (name, players, hud)
         {
         this.name = name;
+        this.gameid = null;
         this.hud = hud;
         this.level = 'CuteLevel';
         this.players = players;
@@ -35,6 +36,7 @@ Class.create('AOBGame', {
     //@+node:celine.20110401213457.6024: ** apply state
     apply_state: function(config)
         {
+        this.gameid = config.gameid;
         this.deck = [];
         config.deck.forEach(function (a)
             {
