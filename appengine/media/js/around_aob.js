@@ -11,5 +11,12 @@ function setNickname(frm)
     window.location.reload();
     return false;
     }
+//@+node:celine.20110403213834.1576: ** joinGame
+function joinGame(game_id)
+    {
+    createCookie('aob_gameid', game_id, 12);
+    window.location = '/game/';
+    return false;
+    }
 //@-others
 //@-leo

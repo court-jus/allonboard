@@ -9,6 +9,7 @@
 import os, datetime
 from google.appengine.dist import use_library
 use_library('django', '1.2')
+import logging
 
 from django.utils import simplejson as json
 
@@ -169,26 +170,84 @@ class LoadGame(webapp.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'application/json'
         result = {
+            "ok": False,
             "name": None,
             "deck": [],
             "players": [],
             "status": None,
+            "gameid": None,
             }
-        gq = Game.all()
+        gk = self.request.get('gameid')
+        logging.error("gk %s " %(gk,))
+        if gk:
+            game = db.get(gk)
+            logging.error("game = %s" % (game,))
+            if game:
+                result.update({
+                    "ok": True,
+                    "name": game.name,
+                    "status": game.status,
+                    "deck": game.deck,
+                    "cards": game.cards,
+                    "gameid": str(game.key()),
+                    })
+        self.response.out.write(json.dumps(result))
+
+    #@-others
+#@+node:celine.20110403213834.1508: *3* class NewGame
+class NewGame(webapp.RequestHandler):
+    #@+others
+    #@+node:celine.20110403213834.1509: *4* get
+    def get(self):
+        template_values = {
+            }
+
+        path = os.path.join(TEMPLATE_DIR, 'newgame.html')
+        self.response.out.write(template.render(path, template_values))
+
+    #@+node:celine.20110403213834.1538: *4* post
+    def post(self):
+        who = who_calls(self.request)
+
+        me = who.get('player')
+
+        new_game_name = self.request.get('name')
+        template_values = {}
+        gq = Game.all().filter("name =", new_game_name)
         if gq.count() == 0:
-            game = Game()
-            game.name="test game"
-            game.deck=DEFAULT_DECK
+            game = Game(
+                name = new_game_name,
+                deck = DEFAULT_DECK
+                )
             game.put()
+            if me:
+                my_participation = Participation(
+                    game = game,
+                    player = me
+                    )
+                my_participation.put()
+            template_values['msg'] = "Game created"
         else:
             game = gq[0]
-        result.update({
-            "name": game.name,
-            "status": game.status,
-            "deck": game.deck,
-            "cards": game.cards,
-            })
-        self.response.out.write(json.dumps(result))
+            template_values['msg'] = "Game already exists"
+        template_values['game_id'] = game.key()
+
+        path = os.path.join(TEMPLATE_DIR, 'newgame.html')
+        self.response.out.write(template.render(path, template_values))
+    #@-others
+#@+node:celine.20110403213834.1536: *3* class MyGames
+class MyGames(webapp.RequestHandler):
+    #@+others
+    #@+node:celine.20110403213834.1537: *4* get
+    def get(self):
+        who = who_calls(self.request)
+
+        template_values = {
+            'me': who.get('player'),
+            }
+
+        path = os.path.join(TEMPLATE_DIR, 'mygames.html')
+        self.response.out.write(template.render(path, template_values))
 
     #@-others
 #@-others
@@ -197,6 +256,8 @@ application = webapp.WSGIApplication(
     [
         ('/player/logout/', LogoutPage),
         ('/player/', PlayerPage),
+        ('/game/new/', NewGame),
+        ('/game/mine/', MyGames),
         ('/game/', GamePage),
         ('/webs/loadgame/', LoadGame),
         ('/', MainPage),

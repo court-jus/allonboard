@@ -1,0 +1,36 @@
+<!--@+leo-ver=5-thin-->
+<!--@+node:celine.20110403213834.1510: * @file newgame.html-->
+<!--@@language xml-->
+<!--@@tabwidth -4-->
+<!--@+<< extends >>-->
+<!--@+node:celine.20110403213834.1512: ** << extends >>-->
+{% extends "base.html" %}
+<!--@-<< extends >>-->
+{% block content %}
+<!--@+<< content >>-->
+<!--@+node:celine.20110403213834.1517: ** << content >>-->
+<!--@+others-->
+<!--@+node:celine.20110403213834.1521: *3* formulaire-->
+<form action="/game/new/" method="post">
+    <table>
+        <tr>
+            <th><label for="name">Nom</label></th><td><input type="text" name="name" id="name"/></td>
+        </tr>
+        <tr>
+            <th colspan="2"><input type="submit" value="OK"/></th>
+        </tr>
+    </table>
+</form>
+<!--@+node:celine.20110403213834.1539: *3* message-->
+{% if msg %}
+    <div class="message">
+        {{ msg }}
+        {% if game_id %}
+            <a href="#" onclick="return joinGame('{{ game_id }}');">Rejoindre</a>
+        {% endif %}
+    </div>
+{% endif %}
+<!--@-others-->
+<!--@-<< content >>-->
+{% endblock %}
+<!--@-leo-->
