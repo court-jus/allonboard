@@ -1,3 +1,9 @@
+//@+leo-ver=5-thin
+//@+node:celine.20110403213834.1542: * @file aob_ss.js
+//@@language javascript
+//@@tabwidth -4
+//@+others
+//@+node:celine.20110403213834.1549: ** loadgame
 function loadgame(THEGAME)
     {
     dojo.xhrGet({
@@ -11,3 +17,5 @@ function loadgame(THEGAME)
         }
         });
     }
+//@-others
+//@-leo
