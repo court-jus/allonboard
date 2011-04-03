@@ -19,6 +19,7 @@
             <td>Enregistré</td>
             <td>Date de création</td>
             <td>Dernière utilisation</td>
+            <td>Parties</td>
         </tr>
         <!--@-<< thead >>-->
     </thead>
@@ -32,6 +33,27 @@
                 <td>{{ p.registered }}</td>
                 <td>{{ p.creation }}</td>
                 <td>{{ p.last_use }}</td>
+                <td class="participations">
+                    <!--@+<< participations >>-->
+                    <!--@+node:celine.20110403213834.1505: *4* << participations >>-->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Game</th>
+                                <th>status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for part in p.participation_set %}
+                                <tr>
+                                    <td>{{ part.game.name }}</td>
+                                    <td>{{ part.status }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!--@-<< participations >>-->
+                </td>
             </tr>
         {% endfor %}
         <!--@-<< tbody >>-->
