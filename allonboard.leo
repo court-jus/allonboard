@@ -20,8 +20,9 @@
 <v t="celine.20110401205125.1777" a="E"><vh>@path appengine</vh>
 <v t="celine.20110401205125.1778"><vh>@file app.yaml</vh></v>
 <v t="celine.20110401205125.1787" a="E"
-expanded="celine.20110401205125.1812,celine.20110401205125.1791,celine.20110401205125.1793,celine.20110401205125.1823,celine.20110401205125.1824,celine.20110401205125.1795,celine.20110401205125.1797,celine.20110401205125.1799,celine.20110401205125.1801,celine.20110401205125.1803,celine.20110403213834.1508,celine.20110403213834.1536,"><vh>@file appengine.py</vh></v>
-<v t="celine.20110401205125.1788"><vh>@file constants.py</vh></v>
+expanded="celine.20110401205125.1812,celine.20110401205125.1791,celine.20110401205125.1793,celine.20110401205125.1823,celine.20110401205125.1824,celine.20110401205125.1795,celine.20110401205125.1797,celine.20110401205125.1799,celine.20110401205125.1801,celine.20110401205125.1803,celine.20110403213834.1508,gl.20110404131229.1545,"><vh>@file appengine.py</vh></v>
+<v t="celine.20110401205125.1788" a="E"
+expanded="celine.20110401205125.1789,celine.20110401205125.1809,celine.20110401205125.1806,"><vh>@file constants.py</vh></v>
 <v t="celine.20110401213457.6112" a="E"><vh>Templates and website</vh>
 <v t="celine.20110401213457.6113" a="E"><vh>@path templates</vh>
 <v t="celine.20110401213457.6114"
@@ -50,10 +51,10 @@ expanded="celine.20110403213834.1517,"><vh>@file newgame.html</vh></v>
 </v>
 <v t="celine.20110401205125.1828" a="E"><vh>@path src</vh>
 <v t="celine.20110401213457.1809"><vh>@file sprites.js</vh></v>
-<v t="celine.20110401213457.1808"
+<v t="celine.20110401213457.1808" a="E"
 expanded="celine.20110401213457.6109,"><vh>@file Player.js</vh></v>
 <v t="celine.20110401213457.1807"><vh>@file Menu.js</vh></v>
-<v t="celine.20110401213457.1806"><vh>@file Game.js</vh></v>
+<v t="celine.20110401213457.1806" a="E"><vh>@file Game.js</vh></v>
 <v t="celine.20110401213457.1805"><vh>@file fonctions.js</vh></v>
 <v t="celine.20110401213457.1804"><vh>@file customrobot.js</vh></v>
 <v t="celine.20110401213457.1803"><vh>@file constantes.js</vh></v>
@@ -96,11 +97,12 @@ expanded="celine.20110401213457.6109,"><vh>@file Player.js</vh></v>
     self.response.headers['Content-Type'] = 'application/json'
     result = {
         "ok": False,
-        "name": None,
-        "deck": [],
-        "players": [],
         "status": None,
         "gameid": None,
+        "name": None,
+        "deck": [],
+        "cards": [],
+        "players": [],
         }
     gk = self.request.get('gameid')
     logging.error("gk %s " %(gk,))
@@ -110,11 +112,12 @@ expanded="celine.20110401213457.6109,"><vh>@file Player.js</vh></v>
         if game:
             result.update({
                 "ok": True,
-                "name": game.name,
                 "status": game.status,
+                "gameid": str(game.key()),
+                "name": game.name,
                 "deck": game.deck,
                 "cards": game.cards,
-                "gameid": str(game.key()),
+                "players": [{'id':str(p.key())} for p in Participation.all().filter("game = ", game)],
                 })
     self.response.out.write(json.dumps(result))
 
@@ -159,17 +162,39 @@ var THEGAME = null;
 </t>
 <t tx="celine.20110401213457.6024">apply_state: function(config)
     {
+    this.loaded_config = config;
     this.gameid = config.gameid;
     this.deck = [];
     config.deck.forEach(function (a)
         {
         this.deck.push(CARD_CLASSES[a]);
         }, this);
+    config.players.forEach(function (pconfig)
+        {
+        if (this.players.length &lt; 6)
+            {
+            var i = this.players.length;
+            var p = new Human();
+            p.init(pconfig.id, i, i, false);
+            p.linkToGame(this);
+            this.scores[p.name] = 0;
+            this.players.push(p);
+            }
+        }, this);
     this.cards = [];
     config.cards.forEach(function (a)
         {
         this.cards.push(CARD_CLASSES[a]);
         }, this);
+    /*
+    In the case of a NEW game, the server will not
+    prefill the cards array
+    */
+    if (this.cards.length == 0)
+        {
+        this.cards = this.deck.slice();
+        this.shuffleCards();
+        }
     },
 </t>
 <t tx="celine.20110401213457.6112"></t>
@@ -246,7 +271,8 @@ var THEGAME = null;
     createCookie('aob_gameid', game_id, 12);
     window.location = '/game/';
     return false;
-    }</t>
+    }
+</t>
 <t tx="celine.20110403213834.1577"></t>
 </tnodes>
 </leo_file>
