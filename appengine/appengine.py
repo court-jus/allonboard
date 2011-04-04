@@ -263,7 +263,7 @@ class JoinGame(webapp.RequestHandler):
         current_players = [part.player for part in game.participation_set.all()]
 
         if game and me and len(current_players) != 6\
-            and me not in current_players:
+            and me not in current_players and game.status == GAME_CREATED:
             part = Participation(player = me,
                                  game = game)
             part.put()
