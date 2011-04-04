@@ -252,6 +252,30 @@ class MyGames(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
     #@-others
+#@+node:gl.20110404131229.1545: *3* class JoinGame
+class JoinGame(webapp.RequestHandler):
+    #@+others
+    #@+node:gl.20110404131229.1546: *4* get
+    def get(self):
+        who = who_calls(self.request)
+        game = db.get(self.request.get('gameid'))
+        me = who.get('player')
+        current_players = [part.player for part in game.participation_set.all()]
+
+        if game and me and len(current_players) != 6\
+            and me not in current_players:
+            part = Participation(player = me,
+                                 game = game)
+            part.put()
+
+        template_values = {
+            'me': me,
+            }
+
+        path = os.path.join(TEMPLATE_DIR, 'mygames.html')
+        self.response.out.write(template.render(path, template_values))
+
+    #@-others
 #@-others
 #@+node:celine.20110401205125.1805: ** main
 application = webapp.WSGIApplication(
@@ -260,6 +284,7 @@ application = webapp.WSGIApplication(
         ('/player/', PlayerPage),
         ('/game/new/', NewGame),
         ('/game/mine/', MyGames),
+        ('/game/join/', JoinGame),
         ('/game/', GamePage),
         ('/webs/loadgame/', LoadGame),
         ('/', MainPage),
