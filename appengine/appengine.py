@@ -171,11 +171,12 @@ class LoadGame(webapp.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         result = {
             "ok": False,
-            "name": None,
-            "deck": [],
-            "players": [],
             "status": None,
             "gameid": None,
+            "name": None,
+            "deck": [],
+            "cards": [],
+            "players": [],
             }
         gk = self.request.get('gameid')
         logging.error("gk %s " %(gk,))
@@ -185,11 +186,12 @@ class LoadGame(webapp.RequestHandler):
             if game:
                 result.update({
                     "ok": True,
-                    "name": game.name,
                     "status": game.status,
+                    "gameid": str(game.key()),
+                    "name": game.name,
                     "deck": game.deck,
                     "cards": game.cards,
-                    "gameid": str(game.key()),
+                    "players": [{'id':str(p.key())} for p in Participation.all().filter("game = ", game)],
                     })
         self.response.out.write(json.dumps(result))
 

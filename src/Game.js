@@ -26,6 +26,7 @@ Class.create('AOBGame', {
         this.deck = DEFAULT_DECK;
         this.cards = this.deck.slice();
         this.shuffleCards();
+        this.loaded_config = null;
         for (var i = 0; i < this.players.length ; i ++ )
             {
             this.players[i].linkToGame(this);
@@ -36,17 +37,39 @@ Class.create('AOBGame', {
     //@+node:celine.20110401213457.6024: ** apply state
     apply_state: function(config)
         {
+        this.loaded_config = config;
         this.gameid = config.gameid;
         this.deck = [];
         config.deck.forEach(function (a)
             {
             this.deck.push(CARD_CLASSES[a]);
             }, this);
+        config.players.forEach(function (pconfig)
+            {
+            if (this.players.length < 6)
+                {
+                var i = this.players.length;
+                var p = new Human();
+                p.init(pconfig.id, i, i, false);
+                p.linkToGame(this);
+                this.scores[p.name] = 0;
+                this.players.push(p);
+                }
+            }, this);
         this.cards = [];
         config.cards.forEach(function (a)
             {
             this.cards.push(CARD_CLASSES[a]);
             }, this);
+        /*
+        In the case of a NEW game, the server will not
+        prefill the cards array
+        */
+        if (this.cards.length == 0)
+            {
+            this.cards = this.deck.slice();
+            this.shuffleCards();
+            }
         },
     //@+node:celine.20110401213457.6025: ** clear HUD
     clearHud: function()
