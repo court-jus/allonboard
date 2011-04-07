@@ -37,6 +37,7 @@ class Game(db.Model):
     status = db.IntegerProperty(choices = GAME_STATUS.keys())
     deck = db.ListProperty(int)
     cards = db.ListProperty(int)
+    owner = db.ReferenceProperty(None, collection_name = 'games_owned')
     #@-<< properties >>
 #@+node:celine.20110401205125.1792: *3* class Player
 class Player(db.Model):
@@ -185,7 +186,8 @@ class NewGame(webapp.RequestHandler):
         if gq.count() == 0:
             game = Game(
                 name = new_game_name,
-                deck = DEFAULT_DECK
+                deck = DEFAULT_DECK,
+                status = GAME_CREATED
                 )
             game.put()
             if me:
@@ -194,6 +196,8 @@ class NewGame(webapp.RequestHandler):
                     player = me
                     )
                 my_participation.put()
+                game.owner = me
+                game.put
             template_values['msg'] = "Game created"
         else:
             game = gq[0]
