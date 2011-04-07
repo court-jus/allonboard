@@ -41,6 +41,7 @@
                             <tr>
                                 <th>Game</th>
                                 <th>status</th>
+                                <th>Join</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +49,7 @@
                                 <tr>
                                     <td>{{ part.game.name }}</td>
                                     <td>{{ part.status }}</td>
+                                    <td><a href="/game/join/?gameid={{ part.game.key }}">V</a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
