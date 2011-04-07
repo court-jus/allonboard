@@ -5,11 +5,11 @@
 #@+others
 #@+node:celine.20110401205125.1790: ** appengine declarations
 # -*- coding: utf-8 -*-
-
-import os, datetime
 from google.appengine.dist import use_library
 use_library('django', '1.2')
+import os, datetime
 import logging
+import random
 
 from django.utils import simplejson as json
 
@@ -37,8 +37,19 @@ class Game(db.Model):
     status = db.IntegerProperty(choices = GAME_STATUS.keys())
     deck = db.ListProperty(int)
     cards = db.ListProperty(int)
+    current_player = db.ReferenceProperty(None, collection_name = 'games_to_play')
     owner = db.ReferenceProperty(None, collection_name = 'games_owned')
     #@-<< properties >>
+    #@+others
+    #@+node:celine.20110407213159.2326: *4* start
+    def startGame(self):
+        participants = Participation.all().filter("game =", self)
+        if participants.count() < 2:
+            return False
+        self.current_player = random.choice(participants)
+        self.status = GAME_RUNNING
+        return True
+    #@-others
 #@+node:celine.20110401205125.1792: *3* class Player
 class Player(db.Model):
     #@+<< docstring >>
@@ -284,6 +295,33 @@ class LoadGame(webapp.RequestHandler):
         self.response.out.write(json.dumps(result))
 
     #@-others
+#@+node:celine.20110407213159.2328: *4* class StartGame
+class StartGame(webapp.RequestHandler):
+    #@+others
+    #@+node:celine.20110407213159.2329: *5* get
+    def get(self):
+        self.response.headers['Content-Type'] = 'application/json'
+        result = {
+            "ok": False,
+            "status": None,
+            "current_player": None,
+            }
+        gk = self.request.get('gameid')
+        logging.error("gk %s " %(gk,))
+        if gk:
+            game = db.get(gk)
+            logging.error("game = %s" % (game,))
+            if game:
+                ok = game.startGame()
+                result.update({
+                    "ok": ok,
+                    "status": game.status,
+                    "current_player": None,
+                    })
+        self.response.out.write(json.dumps(result))
+
+    #@-others
+#@-others
 #@-others
 #@+node:celine.20110401205125.1805: ** main
 application = webapp.WSGIApplication(
@@ -295,6 +333,7 @@ application = webapp.WSGIApplication(
         ('/game/join/', JoinGame),
         ('/game/', GamePage),
         ('/webs/loadgame/', LoadGame),
+        ('/webs/startgame/', StartGame),
         ('/', MainPage),
     ],
     debug = True)
