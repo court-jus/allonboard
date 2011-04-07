@@ -50,7 +50,7 @@ Class.create('AOBGame', {
                 {
                 var i = this.players.length;
                 var p = new Human();
-                p.init(pconfig.id, i, i, false);
+                p.init(pconfig.id, i, pconfig.id, false);
                 p.linkToGame(this);
                 this.scores[p.name] = 0;
                 this.players.push(p);
