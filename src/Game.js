@@ -193,6 +193,41 @@ Class.create('AOBGame', {
             this.startTurn();
             }
         },
+    //@+node:celine.20110407213159.2330: ** requestGameStart
+    requestGameStart: function ()
+        {
+        var my_game_id = this.gameid;
+        if (my_game_id)
+            {
+            dojo.xhrGet({
+                // The URL to request
+                url: "/webs/startgame/",
+                content: {gameid: my_game_id},
+                handleAs: "json",
+                // The method that handles the request's successful result
+                // Handle the response any way you'd like!
+                load: function(result) {
+                    console.debug("Start game request", result);
+                    if (result.ok && result.current_player)
+                        {
+                        this.players.forEach(function (p, i)
+                            {
+                            it (p.id == result.current_player)
+                                {
+                                this.current_player_index = i;
+                                this.current_player = p;
+                                }
+                            }, this);
+                        }
+                    }
+                }, this);
+            }
+        else
+            {
+            alert("Aucune partie sélectionnée. Merci d'en créer une ou de passer par l'écran 'Mes parties'");
+            }
+
+        },
     //@+node:celine.20110401213457.6033: ** create map
     createMap: function()
         {
