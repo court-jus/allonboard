@@ -20,25 +20,23 @@
 <v t="celine.20110401205125.1777" a="E"><vh>@path appengine</vh>
 <v t="celine.20110401205125.1778"><vh>@file app.yaml</vh></v>
 <v t="celine.20110401205125.1787" a="E"
-expanded="celine.20110401205125.1812,celine.20110401205125.1791,celine.20110401205125.1793,celine.20110401205125.1823,celine.20110401205125.1824,celine.20110401205125.1795,celine.20110401205125.1797,celine.20110401205125.1799,celine.20110401205125.1801,celine.20110401205125.1803,celine.20110403213834.1508,gl.20110404131229.1545,"><vh>@file appengine.py</vh></v>
+expanded="celine.20110401205125.1812,celine.20110401205125.1791,celine.20110401205125.1792,celine.20110401205125.1793,celine.20110401205125.1824,celine.20110403213834.1508,gl.20110404131229.1545,celine.20110401205125.1803,celine.20110407213159.2328,"><vh>@file appengine.py</vh></v>
 <v t="celine.20110401205125.1788" a="E"
 expanded="celine.20110401205125.1789,celine.20110401205125.1809,celine.20110401205125.1806,"><vh>@file constants.py</vh></v>
 <v t="celine.20110401213457.6112" a="E"><vh>Templates and website</vh>
 <v t="celine.20110401213457.6113" a="E"><vh>@path templates</vh>
-<v t="celine.20110401213457.6114"
+<v t="celine.20110401213457.6114" a="E"
 expanded="celine.20110401213457.6116,celine.20110401213457.6117,celine.20110401213457.6138,celine.20110401213457.6118,"><vh>@file base.html</vh></v>
-<v t="celine.20110401213457.6119" a="E"><vh>@file game.html</vh></v>
-<v t="celine.20110401213457.6121"
-expanded="celine.20110401213457.6122,celine.20110401213457.6123,"><vh>@file index.html</vh></v>
-<v t="celine.20110401213457.6125"
+<v t="celine.20110401213457.6119"><vh>@file game.html</vh></v>
+<v t="celine.20110401213457.6121"><vh>@file index.html</vh></v>
+<v t="celine.20110401213457.6125" a="E"
 expanded="celine.20110401213457.6127,celine.20110401213457.6129,"><vh>@file players.html</vh></v>
-<v t="celine.20110403213834.1528" a="E"
-expanded="celine.20110403213834.1530,"><vh>@file mygames.html</vh></v>
-<v t="celine.20110403213834.1510" a="E"
+<v t="celine.20110403213834.1528"><vh>@file mygames.html</vh></v>
+<v t="celine.20110403213834.1510"
 expanded="celine.20110403213834.1517,"><vh>@file newgame.html</vh></v>
 </v>
-<v t="celine.20110403213834.1550" a="E"><vh>@path media/aob/current/</vh>
-<v t="celine.20110403213834.1551" a="E"><vh>@auto iframe.html</vh></v>
+<v t="celine.20110403213834.1550"><vh>@path media/aob/current/</vh>
+<v t="celine.20110403213834.1551"><vh>@auto iframe.html</vh></v>
 </v>
 </v>
 </v>
@@ -46,20 +44,19 @@ expanded="celine.20110403213834.1517,"><vh>@file newgame.html</vh></v>
 <v t="celine.20110401205125.1825" a="E"><vh>JS</vh>
 <v t="celine.20110403213834.1541" a="E"><vh>@path appengine/media/js</vh>
 <v t="celine.20110403213834.1542" a="E"><vh>@file aob_ss.js</vh></v>
-<v t="celine.20110403213834.1543" a="E"><vh>@file around_aob.js</vh></v>
-<v t="celine.20110403213834.1544" a="E"><vh>@file cookies.js</vh></v>
+<v t="celine.20110403213834.1543"><vh>@file around_aob.js</vh></v>
+<v t="celine.20110403213834.1544"><vh>@file cookies.js</vh></v>
 </v>
 <v t="celine.20110401205125.1828" a="E"><vh>@path src</vh>
 <v t="celine.20110401213457.1809"><vh>@file sprites.js</vh></v>
-<v t="celine.20110401213457.1808" a="E"
-expanded="celine.20110401213457.6109,"><vh>@file Player.js</vh></v>
+<v t="celine.20110401213457.1808" a="E"><vh>@file Player.js</vh></v>
 <v t="celine.20110401213457.1807"><vh>@file Menu.js</vh></v>
 <v t="celine.20110401213457.1806" a="E"><vh>@file Game.js</vh></v>
 <v t="celine.20110401213457.1805"><vh>@file fonctions.js</vh></v>
 <v t="celine.20110401213457.1804"><vh>@file customrobot.js</vh></v>
 <v t="celine.20110401213457.1803"><vh>@file constantes.js</vh></v>
-<v t="celine.20110401213457.1802" a="E"><vh>@file config.js</vh></v>
-<v t="celine.20110401213457.1801" a="E"><vh>@file allonboard.js</vh>
+<v t="celine.20110401213457.1802"><vh>@file config.js</vh></v>
+<v t="celine.20110401213457.1801"><vh>@file allonboard.js</vh>
 <v t="celine.20110401213457.1828"><vh>allonboard declarations</vh></v>
 <v t="celine.20110401213457.1829"><vh>function</vh></v>
 </v>
@@ -68,15 +65,15 @@ expanded="celine.20110401213457.6109,"><vh>@file Player.js</vh></v>
 </v>
 </v>
 </v>
-<v t="celine.20110403213834.1556" a="E"><vh>Vues</vh>
-<v t="celine.20110403213834.1557" a="E"><vh>New game</vh>
+<v t="celine.20110403213834.1556"><vh>Vues</vh>
+<v t="celine.20110403213834.1557"><vh>New game</vh>
 <v t="celine.20110403213834.1576"><vh>joinGame</vh></v>
 <v t="celine.20110403213834.1508" a="E"><vh>class NewGame</vh>
 <v t="celine.20110403213834.1509"><vh>get</vh></v>
 <v t="celine.20110403213834.1538"><vh>post</vh></v>
 </v>
 </v>
-<v t="celine.20110403213834.1577" a="E"><vh>Load game</vh>
+<v t="celine.20110403213834.1577"><vh>Load game</vh>
 <v t="celine.20110401205125.1803" a="E"><vh>class LoadGame</vh>
 <v t="celine.20110401205125.1804"><vh>get</vh></v>
 </v>
@@ -103,6 +100,8 @@ expanded="celine.20110401213457.6109,"><vh>@file Player.js</vh></v>
         "deck": [],
         "cards": [],
         "players": [],
+        "current_player": None,
+        "owner": None,
         }
     gk = self.request.get('gameid')
     logging.error("gk %s " %(gk,))
@@ -118,6 +117,8 @@ expanded="celine.20110401213457.6109,"><vh>@file Player.js</vh></v>
                 "deck": game.deck,
                 "cards": game.cards,
                 "players": [{'id':str(p.key())} for p in Participation.all().filter("game = ", game)],
+                "current_player": game.current_player.key() if game.current_player else None,
+                "owner" : game.owner.key() if game.owner else None,
                 })
     self.response.out.write(json.dumps(result))
 
@@ -175,7 +176,7 @@ var THEGAME = null;
             {
             var i = this.players.length;
             var p = new Human();
-            p.init(pconfig.id, i, i, false);
+            p.init(pconfig.id, i, pconfig.id, false);
             p.linkToGame(this);
             this.scores[p.name] = 0;
             this.players.push(p);
@@ -221,7 +222,8 @@ var THEGAME = null;
     if gq.count() == 0:
         game = Game(
             name = new_game_name,
-            deck = DEFAULT_DECK
+            deck = DEFAULT_DECK,
+            status = GAME_CREATED
             )
         game.put()
         if me:
@@ -230,6 +232,8 @@ var THEGAME = null;
                 player = me
                 )
             my_participation.put()
+            game.owner = me
+            game.put
         template_values['msg'] = "Game created"
     else:
         game = gq[0]
