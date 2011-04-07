@@ -1,3 +1,5 @@
 myindex.html
 *.swp
 appengine/media/aob/allonboard-1.0/
+*.pyc
+appengine/tags
