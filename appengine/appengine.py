@@ -69,7 +69,6 @@ class Participation(db.Model):
     player = db.ReferenceProperty(Player, required = True)
     game = db.ReferenceProperty(Game, required = True)
     status = db.IntegerProperty(choices = PLAYER_STATUS.keys(), required = True, default = PLAYER_INGAME)
-
     #@-<< properties >>
 
 #@-others
@@ -163,39 +162,6 @@ class LogoutPage(webapp.RequestHandler):
         self.redirect(users.create_logout_url('/'))
 
     #@-others
-#@+node:celine.20110401205125.1803: *3* class LoadGame
-class LoadGame(webapp.RequestHandler):
-    #@+others
-    #@+node:celine.20110401205125.1804: *4* get
-    def get(self):
-        self.response.headers['Content-Type'] = 'application/json'
-        result = {
-            "ok": False,
-            "status": None,
-            "gameid": None,
-            "name": None,
-            "deck": [],
-            "cards": [],
-            "players": [],
-            }
-        gk = self.request.get('gameid')
-        logging.error("gk %s " %(gk,))
-        if gk:
-            game = db.get(gk)
-            logging.error("game = %s" % (game,))
-            if game:
-                result.update({
-                    "ok": True,
-                    "status": game.status,
-                    "gameid": str(game.key()),
-                    "name": game.name,
-                    "deck": game.deck,
-                    "cards": game.cards,
-                    "players": [{'id':str(p.key())} for p in Participation.all().filter("game = ", game)],
-                    })
-        self.response.out.write(json.dumps(result))
-
-    #@-others
 #@+node:celine.20110403213834.1508: *3* class NewGame
 class NewGame(webapp.RequestHandler):
     #@+others
@@ -274,6 +240,45 @@ class JoinGame(webapp.RequestHandler):
 
         path = os.path.join(TEMPLATE_DIR, 'mygames.html')
         self.response.out.write(template.render(path, template_values))
+
+    #@-others
+#@+node:celine.20110407213159.2327: *3* web services
+#@+others
+#@+node:celine.20110401205125.1803: *4* class LoadGame
+class LoadGame(webapp.RequestHandler):
+    #@+others
+    #@+node:celine.20110401205125.1804: *5* get
+    def get(self):
+        self.response.headers['Content-Type'] = 'application/json'
+        result = {
+            "ok": False,
+            "status": None,
+            "gameid": None,
+            "name": None,
+            "deck": [],
+            "cards": [],
+            "players": [],
+            "current_player": None,
+            "owner": None,
+            }
+        gk = self.request.get('gameid')
+        logging.error("gk %s " %(gk,))
+        if gk:
+            game = db.get(gk)
+            logging.error("game = %s" % (game,))
+            if game:
+                result.update({
+                    "ok": True,
+                    "status": game.status,
+                    "gameid": str(game.key()),
+                    "name": game.name,
+                    "deck": game.deck,
+                    "cards": game.cards,
+                    "players": [{'id':str(p.key())} for p in Participation.all().filter("game = ", game)],
+                    "current_player": game.current_player.key() if game.current_player else None,
+                    "owner" : game.owner.key() if game.owner else None,
+                    })
+        self.response.out.write(json.dumps(result))
 
     #@-others
 #@-others
